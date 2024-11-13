@@ -1,0 +1,17 @@
+.Vue-Toastification__container {
+  width: 100%;
+}
+
+.Vue-Toastification__container.top-center {
+  left: 0;
+  margin-left: 0;
+}
+
+.Vue-Toastification__toast {
+  background-color: transparent;
+  margin: 0;
+  margin-bottom: 1rem;
+  padding: 0;
+  max-width: 1280px;
+  width: 100%;
+}

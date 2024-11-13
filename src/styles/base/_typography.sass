@@ -1,0 +1,242 @@
+@use 'constants.sass' as *
+@use 'functions.sass' as *
+
+$base: 14px
+$letter-spacing-percent: 0.02rem
+$mobile: 16px
+$ratio: 1.25
+
+// Typography functions and mixins
+@import url('https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap')
+
+
+$fw-normal: 400
+$fw-medium: 500
+$fw-semi-bold: 600
+$fw-bold: 700
+
+$display-2xl-font-size: 72px
+$display-xl-font-size: 60px
+$display-lg-font-size: 48px
+$display-md-font-size: 36px
+$display-sm-font-size: 30px
+$display-xs-font-size: 24px
+$text-xl-font-size: 20px
+$text-lg-font-size: 18px
+$text-md-font-size: 16px
+$text-sm-font-size: 14px
+$text-xs-font-size: 12px
+
+// TODO: add variables for line-heights if we aren't going to follow a fixed ratio between size and line-height
+
+@mixin font-family
+  font-family: 'Inter', sans-serif
+
+@mixin display-2xl
+  font-size: rems($display-2xl-font-size)
+  letter-spacing: $letter-spacing-percent
+  line-height: rems($display-2xl-font-size * $ratio)
+
+@mixin display-xl
+  font-size: rems($display-xl-font-size)
+  letter-spacing: $letter-spacing-percent
+  line-height: rems($display-xl-font-size * $ratio)
+
+@mixin display-lg
+  font-size: rems($display-lg-font-size)
+  letter-spacing: $letter-spacing-percent
+  line-height: rems($display-lg-font-size * $ratio)
+
+@mixin display-md
+  font-size: rems($display-md-font-size)
+  letter-spacing: $letter-spacing-percent
+  line-height: rems($display-md-font-size * $ratio)
+
+@mixin display-sm
+  font-size: rems($display-sm-font-size)
+  line-height: rems($display-sm-font-size * $ratio)
+
+@mixin display-xs
+  font-size: rems($display-xs-font-size)
+  line-height: rems($display-xs-font-size * $ratio)
+
+@mixin text-xl
+  font-size: rems($text-xl-font-size)
+  line-height: rems($text-xl-font-size * $ratio)
+
+@mixin text-lg
+  font-size: rems($text-lg-font-size)
+  line-height: rems($text-lg-font-size * $ratio)
+
+@mixin text-md
+  font-size: rems($text-md-font-size)
+  line-height: rems($text-md-font-size * $ratio)
+
+@mixin text-sm
+  font-size: rems($text-sm-font-size)
+  line-height: rems($text-sm-font-size * $ratio)
+
+@mixin text-xs
+  font-size: rems($text-xs-font-size)
+  line-height: rems($text-xs-font-size * $ratio)
+
+a,
+blockquote,
+button,
+div,
+figcaption,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+label,
+li,
+p,
+span,
+textarea,
+time
+  +font-family
+  font-weight: $fw-normal
+  margin: 0
+  padding: 0
+
+p,
+a,
+li,
+figcaption,
+label,
+blockquote,
+hr,
+span
+  text-align: left
+
+a
+  text-decoration: none
+  user-select: none
+
+  &:hover,
+  &:focus
+    cursor: pointer
+
+  &:visited
+    text-decoration: none
+
+button
+  +text-md
+
+  @media #{$tablet-large-and-down}
+    // NA
+
+h1
+  +display-2xl
+
+  @media #{$tablet-large-and-down}
+    +display-lg
+
+h2
+  +display-xl
+
+  @media #{$tablet-large-and-down}
+    +display-md
+
+h3
+  +display-lg
+
+  @media #{$tablet-large-and-down}
+    +display-sm
+
+h4
+  +display-md
+
+  @media #{$tablet-large-and-down}
+    +display-xs
+
+h5
+  +display-sm
+
+  @media #{$tablet-large-and-down}
+    +text-xl
+
+h6
+  +display-xs
+
+  @media #{$tablet-large-and-down}
+    +text-lg
+
+.subtitle-1
+  +text-xl
+
+  @media #{$tablet-large-and-down}
+    +text-md
+
+.subtitle-2
+  +text-lg
+
+  @media #{$tablet-large-and-down}
+    +text-sm
+
+.body-1
+  +text-sm
+
+  @media #{$tablet-large-and-down}
+    // NA
+
+.body-2
+  +text-xs
+
+  @media #{$tablet-large-and-down}
+    // NA
+
+.caption
+  // NA
+
+.overline
+  // NA
+
+// Font-weights
+.fw-bold
+  font-weight: $fw-bold
+
+.fw-med
+  font-weight: $fw-medium
+
+.fw-reg
+  font-weight: $fw-normal
+
+.fw-semi-bold
+  font-weight: $fw-semi-bold
+
+// Font modifiers
+.capitalize
+  text-transform: capitalize !important
+
+.center
+  text-align: center !important
+
+.def-lh
+  line-height: 1
+
+.italic
+  font-style: italic
+
+.no-cap
+  text-transform: none !important
+
+.no-select
+  user-select: none
+
+.no-wrap
+  white-space: nowrap
+
+.right
+  text-align: right !important
+
+.underline
+  text-decoration: underline !important
+
+.uppercase
+  text-transform: uppercase !important

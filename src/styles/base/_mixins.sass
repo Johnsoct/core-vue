@@ -1,0 +1,34 @@
+@mixin flex ($direction: row, $align: flex-start, $basis: auto, $justify: flex-start, $wrap: nowrap, $grow: unset, $shrink: unset)
+  align-items: $align
+  display: flex
+  flex-basis: $basis
+  flex-direction: $direction
+  flex-grow: $grow
+  flex-shrink: $shrink
+  flex-wrap: $wrap
+  justify-content: $justify
+
+@mixin overflow-ellipsis($line-count: 1, $line-height: null, $hyphens: false)
+  overflow: hidden
+  text-overflow: ellipsis
+  @if $line-count == 1
+    white-space: nowrap
+  @else
+    white-space: normal
+    // https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+    word-wrap: break-word // Non-standard Microsoft extension
+    overflow-wrap: break-word // CSS Text Module Level 3
+    word-break: break-word // Non-standard Webkit extension
+    hyphens: if($hyphens, auto, none)
+    // Webkit-specific hack for ellipsifying multi-line text
+    -webkit-box-orient: vertical
+    -webkit-line-clamp: $line-count
+    // Also clip the text based on line height and count
+    @if $line-height
+      // Resolve pre-defined font style names
+      @if type-of($line-height) == string and map-has-key($text-styles, $line-height)
+        $text-style: map-get($text-styles, $line-height)
+        $line-height: map-get($text-style, line-height)
+      line-height: $line-height
+      max-height: ($line-height * $line-count)
+

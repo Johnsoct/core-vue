@@ -1,0 +1,154 @@
+.tooltip
+  $block: &
+  $spaceFromParent: $spacing-5
+  +flex($justify: center, $align: center)
+  border-bottom: rems(1px) dashed $border
+  position: relative
+
+  &:after
+    border: rems(8px) solid $primary-400-bg
+    content: ""
+    display: none
+    opacity: 0
+    position: absolute
+    transition: 0.3s opacity
+
+  &.bottom:after
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    bottom: -$spaceFromParent
+    margin-top: $spaceFromParent
+
+  &.left:after
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    left: -$spaceFromParent
+    margin-right: $spaceFromParent
+
+  &.right:after
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    right: -$spaceFromParent
+    margin-left: $spaceFromParent
+
+  &.top:after
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    top: -$spaceFromParent
+    margin-bottom: $spaceFromParent
+
+  &:before
+    border-radius: $border-radius
+    content: attr(data-tooltip)
+    display: none
+    opacity: 0
+    padding: $spacing-2 $spacing-3
+    position: absolute
+    transition: 0.3s opacity
+    width: max-content
+    z-index: 4
+
+  &:hover:before,
+  &:hover:after
+    display: flex
+    opacity: 1
+
+  &.bottom:before
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    top: 100%
+    margin-top: $spaceFromParent
+
+  &.left:before
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    right: 100%
+    margin-right: $spaceFromParent
+
+  &.right:before
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    left: 100%
+    margin-left: $spaceFromParent
+
+  &.top:before
+    /* reset defaults */
+    bottom: initial
+    left: initial
+    margin: initial
+    right: initial
+    top: initial
+
+    bottom: 100%
+    margin-bottom: $spaceFromParent
+
+  &--dark
+
+    &.bottom:after
+      border-color:  transparent transparent $secondary-900-bg transparent
+
+    &.left:after
+      border-color:  transparent transparent transparent $secondary-900-bg
+
+    &.right:after
+      border-color:  transparent $secondary-900-bg transparent transparent
+
+    &.top:after
+      border-color: $secondary-900-bg transparent transparent transparent
+
+    &:before
+      background-color: $secondary-900-bg
+      color: $base-white
+
+  &--light
+
+    &.bottom:after
+      border-color:  transparent transparent $secondary-200-bg transparent
+
+    &.left:after
+      border-color:  transparent transparent transparent $secondary-200-bg
+
+    &.right:after
+      border-color:  transparent $secondary-200-bg transparent transparent
+
+    &.top:after
+      border-color: $secondary-200-bg transparent transparent transparent
+
+    &:before
+      background-color: $secondary-200-bg
+      color: $secondary-800-bg
