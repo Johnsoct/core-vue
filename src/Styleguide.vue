@@ -805,40 +805,37 @@ const triggerSuccessToastr = (): void => {
                                                                 <div class="Styleguide__buttons-buttons-example">
                                                                         <label
                                                                                 class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize">Rest</label>
-                                                                        <base-button :icon="'ring'" :size="size"
-                                                                                :type="style">
+                                                                        <base-button :size="size" :type="style">
                                                                                 Button CTA
                                                                         </base-button>
                                                                 </div>
                                                                 <div class="Styleguide__buttons-buttons-example">
                                                                         <label
                                                                                 class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize">Hover</label>
-                                                                        <base-button :icon="'ring'" :size="size"
-                                                                                :type="style">
+                                                                        <base-button :size="size" :type="style">
                                                                                 Button CTA
                                                                         </base-button>
                                                                 </div>
                                                                 <div class="Styleguide__buttons-buttons-example">
                                                                         <label
                                                                                 class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize">Focused</label>
-                                                                        <base-button :icon="'ring'" :size="size"
-                                                                                :type="style">
+                                                                        <base-button :size="size" :type="style">
                                                                                 Button CTA
                                                                         </base-button>
                                                                 </div>
                                                                 <div class="Styleguide__buttons-buttons-example">
                                                                         <label
                                                                                 class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize">Disabled</label>
-                                                                        <base-button :disabled="true" :icon="'ring'"
-                                                                                :size="size" :type="style">
+                                                                        <base-button :disabled="true" :size="size"
+                                                                                :type="style">
                                                                                 Button CTA
                                                                         </base-button>
                                                                 </div>
                                                                 <div class="Styleguide__buttons-buttons-example">
                                                                         <label
                                                                                 class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize">Loading</label>
-                                                                        <base-button :icon="'ring'" :loading="true"
-                                                                                :size="size" :type="style">
+                                                                        <base-button :loading="true" :size="size"
+                                                                                :type="style">
                                                                                 Button CTA
                                                                         </base-button>
                                                                 </div>
