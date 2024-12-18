@@ -34,7 +34,7 @@ const CoreFrontend = {
 };
 
 export default CoreFrontend;
-export * from '@src/utils/keys';
-export * from '@src/components';
-export * from '@src/utils/math/big';
 export * from '@cypress/support/utils/colors';
+export * from '@src/components';
+export * from '@src/utils/keys';
+export * from '@src/utils/math/big';

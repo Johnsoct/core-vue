@@ -1,109 +1,109 @@
 <script setup lang="ts">
-  // Packages
-  import {
+// Packages
+import {
     ref,
     watch,
-  } from 'vue';
-  // Components
-  import BaseBeatLoader from '@src/components/base/base-beat-loader.vue';
-  import Ring from '@src/components/svg/ring.vue';
+} from 'vue';
+// Components
+import BaseBeatLoader from '@src/components/base/base-beat-loader.vue';
+import Ring from '@src/components/svg/ring.vue';
 
-  const emits = defineEmits([
+const emits = defineEmits([
     'click',
-  ]);
-  const props = defineProps({
+]);
+const props = defineProps({
     disabled: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     icon: {
-      default: null,
-      required: false,
-      type: String,
-      validator: (value: string) => {
-        return [
-          'ring',
-        ].includes(value);
-      },
+        default: null,
+        required: false,
+        type: String,
+        validator: (value: string) => {
+            return [
+                'ring',
+            ].includes(value);
+        },
     },
     loading: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     size: {
-      default: 'md',
-      required: false,
-      type: String,
-      validator: (value: string) => {
-        return [
-          'lg',
-          'md',
-          'xl',
-        ].includes(value);
-      },
+        default: 'md',
+        required: false,
+        type: String,
+        validator: (value: string) => {
+            return [
+                'lg',
+                'md',
+                'xl',
+            ].includes(value);
+        },
     },
     type: {
-      default: 'primary',
-      required: false,
-      type: String,
-      validator: (value: string) => {
-        return [
-          'error',
-          'primary',
-          'secondary',
-          'tertiary',
-        ].includes(value);
-      },
+        default: 'primary',
+        required: false,
+        type: String,
+        validator: (value: string) => {
+            return [
+                'error',
+                'primary',
+                'secondary',
+                'tertiary',
+            ].includes(value);
+        },
     },
-  });
+});
 
-  const loading = ref(props.loading);
+const loading = ref(props.loading);
 
-  // eslint-disable-next-line arrow-body-style
-  watch(() => props.loading, () => {
+// eslint-disable-next-line arrow-body-style
+watch(() => props.loading, () => {
     if (props.loading) {
-      loading.value = true;
+        loading.value = true;
     }
     else {
-      loading.value = false;
+        loading.value = false;
     }
-  });
+});
 
-  const clickHandler = ($event: Event): void => {
+const clickHandler = ($event: Event): void => {
     if (props.disabled || props.loading) {
-      $event.stopPropagation();
-      return;
+        $event.stopPropagation();
+        return;
     }
     else {
-      emits('click', $event);
+        emits('click', $event);
     }
-  };
+};
 </script>
 
 <template>
-  <button
-    @click="clickHandler"
-    :aria-disabled="disabled"
-    :class="`BaseButton BaseButton--${size} BaseButton--${type}`"
-    :disabled="disabled"
-    data-cy="base-button"
-  >
-    <ring
-      v-if="icon === 'ring'"
-      class="BaseButton__icon"
-      data-cy="base-button-icon-default"
-    />
-    <div
-      v-if="loading"
-      class="BaseButton__loading-bg"
-      data-cy="base-button-loader"
+    <button
+        @click="clickHandler"
+        :aria-disabled="disabled"
+        :class="`BaseButton BaseButton--${size} BaseButton--${type}`"
+        :disabled="disabled"
+        data-cy="base-button"
     >
-      <base-beat-loader class="BaseButton__loader" />
-    </div>
-    <slot />
-  </button>
+        <ring
+            v-if="icon === 'ring'"
+            class="BaseButton__icon"
+            data-cy="base-button-icon-default"
+        />
+        <div
+            v-if="loading"
+            class="BaseButton__loading-bg"
+            data-cy="base-button-loader"
+        >
+            <base-beat-loader class="BaseButton__loader" />
+        </div>
+        <slot />
+    </button>
 </template>
 
 <style lang="sass">

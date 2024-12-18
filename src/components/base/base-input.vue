@@ -1,155 +1,155 @@
 <script setup lang="ts">
   // Packages
-  import {
+import {
     ref,
     watch,
-  } from 'vue';
-  // Helpers
-  import {
+} from 'vue';
+// Helpers
+import {
     cleanUserInput,
-  } from '@src/utils/formatting/input';
-  import {
+} from '@src/utils/formatting/input';
+import {
     convertDollarsToBig,
-  } from '@src/utils/math/big';
-  // Components
-  import AlertCircle from '@src/components/svg/alert-circle.vue';
-  import Eye from '@src/components/svg/eye.vue';
-  // Types
-  import type {
+} from '@src/utils/math/big';
+// Components
+import AlertCircle from '@src/components/svg/alert-circle.vue';
+import Eye from '@src/components/svg/eye.vue';
+// Types
+import type {
     BaseInputCurrencyEmit,
-  } from '@ts/inputs';
+} from '@ts/inputs';
 
-  const emits = defineEmits([
+const emits = defineEmits([
     'input',
     'update:modelValue',
-  ]);
-  const props = defineProps({
+]);
+const props = defineProps({
     borderless: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     currency: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     disabled: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     hint: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     instructions: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     label: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     labelFor: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     maxLength: {
-      default: 255,
-      required: false,
-      type: Number,
+        default: 255,
+        required: false,
+        type: Number,
     },
     minLength: {
-      default: null,
-      required: false,
-      type: Number,
+        default: null,
+        required: false,
+        type: Number,
     },
     // Required if currency is true
     // If currency is true, prop value should be the emitted .cleaned
     modelValue: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     placeholder: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     required: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     type: {
-      default: 'text',
-      required: false,
-      type: String,
+        default: 'text',
+        required: false,
+        type: String,
     },
     valid: {
-      default: true,
-      required: false,
-      type: Boolean,
+        default: true,
+        required: false,
+        type: Boolean,
     },
-  });
+});
 
-  const localType = ref(props.type);
-  const localValid = ref(props.valid);
+const localType = ref(props.type);
+const localValid = ref(props.valid);
 
-  watch(
+watch(
     [
-      () => {
-        return props.type;
-      },
-      () => {
-        return props.valid;
-      },
+        () => {
+            return props.type;
+        },
+        () => {
+            return props.valid;
+        },
     ],
     ([ type, valid ]) => {
-      localType.value = type;
-      localValid.value = valid;
+        localType.value = type;
+        localValid.value = valid;
     }
-  );
+);
 
-  const getCurrencyValueFromCleanInput = (cleanedInput: string): BaseInputCurrencyEmit => {
+const getCurrencyValueFromCleanInput = (cleanedInput: string): BaseInputCurrencyEmit => {
     if (cleanedInput) {
-      // convertDollarsToBig will fail if multiple "." are in the input, but we can't
-      // reliably clean "." from the user input
-      try {
-        return {
-          big: convertDollarsToBig(cleanedInput),
-          cleaned: cleanedInput,
-        };
-      }
-      catch (error) {
+        // convertDollarsToBig will fail if multiple "." are in the input, but we can't
+        // reliably clean "." from the user input
+        try {
+            return {
+                big: convertDollarsToBig(cleanedInput),
+                cleaned: cleanedInput,
+            };
+        }
+        catch (error) {
+            return '';
+        }
+    }
+    else {
         return '';
-      }
     }
-    else {
-      return '';
-    }
-  };
+};
 
-  const getCurrencyValueFromUserInput = (userInput: string): BaseInputCurrencyEmit => {
+const getCurrencyValueFromUserInput = (userInput: string): BaseInputCurrencyEmit => {
     if (props.currency) {
-      const cleanedInput = cleanUserInput(userInput);
-      // Only modify emittedInput if cleanedInput isn't null (i.e. input "ff" would be null)
-      // because big will throw an [invalid number] error if a non-number is passed
-      return getCurrencyValueFromCleanInput(cleanedInput);
+        const cleanedInput = cleanUserInput(userInput);
+        // Only modify emittedInput if cleanedInput isn't null (i.e. input "ff" would be null)
+        // because big will throw an [invalid number] error if a non-number is passed
+        return getCurrencyValueFromCleanInput(cleanedInput);
     }
     else {
-      return undefined;
+        return undefined;
     }
-  };
+};
 
-  const emitInput = ($event: Event): void => {
+const emitInput = ($event: Event): void => {
     if (!$event.target) {
-      return;
+        return;
     }
 
     /*
@@ -168,95 +168,95 @@
     const userInputCurrencyValue: BaseInputCurrencyEmit = getCurrencyValueFromUserInput(userInput);
 
     if (userInputCurrencyValue !== undefined) {
-      emits('input', userInputCurrencyValue);
-      emits('update:modelValue', userInputCurrencyValue);
+        emits('input', userInputCurrencyValue);
+        emits('update:modelValue', userInputCurrencyValue);
     }
     else {
-      emits('input', userInput);
-      emits('update:modelValue', userInput);
+        emits('input', userInput);
+        emits('update:modelValue', userInput);
     }
-  };
+};
 
-  const setAbandonedRequiredInputInvalid = ($event: Event) => {
+const setAbandonedRequiredInputInvalid = ($event: Event) => {
     if (props.required) {
-      const userInput: string = ($event.target as HTMLInputElement).value.trim();
+        const userInput: string = ($event.target as HTMLInputElement).value.trim();
 
-      if (!userInput.length) {
-        localValid.value = false;
-      }
+        if (!userInput.length) {
+            localValid.value = false;
+        }
     }
-  };
+};
 
-  const toggleInputType = (): void => {
+const toggleInputType = (): void => {
     const originalType = props.type;
     if (originalType !== 'password') {
-      return;
+        return;
     }
     // eslint-disable-next-line no-unused-expressions
     localType.value === 'password'
-      ? localType.value = 'text'
-      : localType.value = 'password';
-  };
+        ? localType.value = 'text'
+        : localType.value = 'password';
+};
 </script>
 
 <template>
-  <div class="BaseInput">
-    <label
-      v-if="label"
-      class="BaseInput__label"
-      data-cy="base-input-label"
-      :for="labelFor"
-    >
-      <slot />
-    </label>
-    <input
-      @focusout="setAbandonedRequiredInputInvalid"
-      @input="emitInput"
-      autocomplete="off"
-      :class="['BaseInput__input fs-14', {
-        'BaseInput__input--borderless': borderless && localValid,
-        'BaseInput__input--error': !localValid,
-        'BaseInput__input--hint': hint,
-      }]"
-      data-cy="base-input-input"
-      :disabled="disabled"
-      :id="labelFor"
-      :maxlength="maxLength"
-      :minlength="minLength"
-      :placeholder="placeholder"
-      :type="localType"
-      :value="modelValue"
-    >
-    <alert-circle
-      v-if="!localValid"
-      class="BaseInput__error-icon"
-      data-cy="base-input-error-icon"
-    />
-    <eye
-      v-if="type === 'password'"
-      @click="toggleInputType"
-      class="BaseInput__view-icon"
-      data-cy="base-input-password-view-icon"
-    />
-    <transition name="Transition__fade">
-      <label
-        v-if="!localValid"
-        class="BaseInput__error-label"
-        data-cy="base-input-instructions"
-      >
-        {{ instructions }}
-      </label>
-    </transition>
-    <transition name="Transition__fade">
-      <label
-        v-if="hint"
-        class="BaseInput__hint-label"
-        data-cy="base-input-hint"
-      >
-        {{ hint }}
-      </label>
-    </transition>
-  </div>
+    <div class="BaseInput">
+        <label
+            v-if="label"
+            class="BaseInput__label"
+            data-cy="base-input-label"
+            :for="labelFor"
+        >
+            <slot />
+        </label>
+        <input
+            @focusout="setAbandonedRequiredInputInvalid"
+            @input="emitInput"
+            autocomplete="off"
+            :class="['BaseInput__input fs-14', {
+                'BaseInput__input--borderless': borderless && localValid,
+                'BaseInput__input--error': !localValid,
+                'BaseInput__input--hint': hint,
+            }]"
+            data-cy="base-input-input"
+            :disabled="disabled"
+            :id="labelFor"
+            :maxlength="maxLength"
+            :minlength="minLength"
+            :placeholder="placeholder"
+            :type="localType"
+            :value="modelValue"
+        >
+        <alert-circle
+            v-if="!localValid"
+            class="BaseInput__error-icon"
+            data-cy="base-input-error-icon"
+        />
+        <eye
+            v-if="type === 'password'"
+            @click="toggleInputType"
+            class="BaseInput__view-icon"
+            data-cy="base-input-password-view-icon"
+        />
+        <transition name="Transition__fade">
+            <label
+                v-if="!localValid"
+                class="BaseInput__error-label"
+                data-cy="base-input-instructions"
+            >
+                {{ instructions }}
+            </label>
+        </transition>
+        <transition name="Transition__fade">
+            <label
+                v-if="hint"
+                class="BaseInput__hint-label"
+                data-cy="base-input-hint"
+            >
+                {{ hint }}
+            </label>
+        </transition>
+    </div>
 </template>
 
 <style lang="sass">

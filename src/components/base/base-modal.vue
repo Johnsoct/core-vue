@@ -1,86 +1,86 @@
 <script setup lang="ts">
   // Components
-  import XClose from '@src/components/svg/x-close.vue';
+import XClose from '@src/components/svg/x-close.vue';
 
-  const emits = defineEmits([
+const emits = defineEmits([
     'close-modal',
-  ]);
-  const props = defineProps({
+]);
+const props = defineProps({
     header: {
-      required: true,
-      type: String,
+        required: true,
+        type: String,
     },
     isClosable: {
-      default: true,
-      required: false,
-      type: Boolean,
+        default: true,
+        required: false,
+        type: Boolean,
     },
     subheader: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
-  });
+});
 
-  const onClose = () => {
+const onClose = () => {
     if (props.isClosable) {
-      emits("close-modal");
+        emits("close-modal");
     }
-  };
+};
 </script>
 
 <template>
-  <div
-    class="BaseModal"
-    data-cy="base-modal"
-  >
     <div
-      class="BaseModal__modal"
-      data-cy="base-modal-modal"
+        class="BaseModal"
+        data-cy="base-modal"
     >
-      <div class="BaseModal__top">
-        <div class="BaseModal__text-content">
-          <div
-            v-if="$slots.icon"
-            class="BaseModal__text-content-icon"
-            data-cy="base-modal-text-content-icon"
-          >
-            <slot name="icon" />
-          </div>
-          <label
-            v-if="header && header.length"
-            class="BaseModal__text-content-header"
-            data-cy="base-modal-text-content-header"
-          >
-            {{ header }}
-          </label>
-          <label
-            v-if="subheader && subheader.length"
-            class="BaseModal__text-content-subheader"
-            data-cy="base-modal-text-content-subheader"
-          >
-            {{ subheader }}
-          </label>
-        </div>
+        <div
+            class="BaseModal__modal"
+            data-cy="base-modal-modal"
+        >
+            <div class="BaseModal__top">
+                <div class="BaseModal__text-content">
+                    <div
+                        v-if="$slots.icon"
+                        class="BaseModal__text-content-icon"
+                        data-cy="base-modal-text-content-icon"
+                    >
+                        <slot name="icon" />
+                    </div>
+                    <label
+                        v-if="header && header.length"
+                        class="BaseModal__text-content-header"
+                        data-cy="base-modal-text-content-header"
+                    >
+                        {{ header }}
+                    </label>
+                    <label
+                        v-if="subheader && subheader.length"
+                        class="BaseModal__text-content-subheader"
+                        data-cy="base-modal-text-content-subheader"
+                    >
+                        {{ subheader }}
+                    </label>
+                </div>
 
-        <button class="BaseModal__close-icon-btn">
-          <x-close
-            v-if="isClosable"
-            @click="onClose"
-            class="BaseModal__close-icon"
-            data-cy="base-modal-close-icon"
-          />
-        </button>
-      </div>
-      <div
-        v-if="$slots.content"
-        class="BaseModal__bottom"
-        data-cy="base-modal-content"
-      >
-        <slot name="content" />
-      </div>
+                <button class="BaseModal__close-icon-btn">
+                    <x-close
+                        v-if="isClosable"
+                        @click="onClose"
+                        class="BaseModal__close-icon"
+                        data-cy="base-modal-close-icon"
+                    />
+                </button>
+            </div>
+            <div
+                v-if="$slots.content"
+                class="BaseModal__bottom"
+                data-cy="base-modal-content"
+            >
+                <slot name="content" />
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <style lang="sass">

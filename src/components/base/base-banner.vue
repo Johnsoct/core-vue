@@ -1,136 +1,136 @@
 <script setup lang="ts">
   // Packages
-  import { useToast } from 'vue-toastification';
-  // Components
-  import AlertTriangle from '@src/components/svg/alert-triangle.vue';
-  import BaseButton from '@src/components/base/base-button.vue';
-  import CheckCircle from '@src/components/svg/check-circle.vue';
-  import Message from '@src/components/svg/message.vue';
-  import Stars from '@src/components/svg/stars.vue';
-  import XClose from '@src/components/svg/x-close.vue';
+import { useToast } from 'vue-toastification';
+// Components
+import AlertTriangle from '@src/components/svg/alert-triangle.vue';
+import BaseButton from '@src/components/base/base-button.vue';
+import CheckCircle from '@src/components/svg/check-circle.vue';
+import Message from '@src/components/svg/message.vue';
+import Stars from '@src/components/svg/stars.vue';
+import XClose from '@src/components/svg/x-close.vue';
 
-  const emits = defineEmits([ 'close-toast' ]);
-  const props = defineProps({
+const emits = defineEmits([ 'close-toast' ]);
+const props = defineProps({
     actionCallback: {
-      default: null,
-      required: false,
-      type: Function,
+        default: null,
+        required: false,
+        type: Function,
     },
     actionText: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     close: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     header: {
-      required: true,
-      type: String,
+        required: true,
+        type: String,
     },
     subheader: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     type: {
-      required: true,
-      type: String,
-      validator: (value: string) => {
-        return [
-          'error',
-          'info',
-          'persistent',
-          'success',
-        ].includes(value);
-      },
+        required: true,
+        type: String,
+        validator: (value: string) => {
+            return [
+                'error',
+                'info',
+                'persistent',
+                'success',
+            ].includes(value);
+        },
     },
-  });
+});
 
-  // Because this component is rendered outside of the app (via the vue-toastification plugin),
-  // it doesn't have access to the provide options from app (even with sharedAppContext: true)
-  const Toastr = useToast();
+// Because this component is rendered outside of the app (via the vue-toastification plugin),
+// it doesn't have access to the provide options from app (even with sharedAppContext: true)
+const Toastr = useToast();
 
-  const buttonCallback = (): void => {
+const buttonCallback = (): void => {
     if (props.actionCallback) {
-      props.actionCallback();
+        props.actionCallback();
     }
 
     Toastr.clear();
-  };
+};
 </script>
 
 <template>
-  <div
-    :class="`BaseBanner BaseBanner--${type}`"
-    :data-cy="`base-banner-${props.type}`"
-  >
-    <div class="BaseBanner__left">
-      <div class="BaseBanner__icon-container">
-        <alert-triangle
-          v-if="type === 'error'"
-          class="BaseBanner__icon"
-          data-cy="base-banner-icon-alert-triangle"
-        />
-        <check-circle
-          v-if="type === 'info'"
-          class="BaseBanner__icon"
-          data-cy="base-banner-icon-check-circle"
-        />
-        <message
-          v-if="type === 'persistent'"
-          class="BaseBanner__icon"
-          data-cy="base-banner-icon-message"
-        />
-        <stars
-          v-if="type === 'success'"
-          class="BaseBanner__icon"
-          data-cy="base-banner-icon-stars"
-        />
-      </div>
+    <div
+        :class="`BaseBanner BaseBanner--${type}`"
+        :data-cy="`base-banner-${props.type}`"
+    >
+        <div class="BaseBanner__left">
+            <div class="BaseBanner__icon-container">
+                <alert-triangle
+                    v-if="type === 'error'"
+                    class="BaseBanner__icon"
+                    data-cy="base-banner-icon-alert-triangle"
+                />
+                <check-circle
+                    v-if="type === 'info'"
+                    class="BaseBanner__icon"
+                    data-cy="base-banner-icon-check-circle"
+                />
+                <message
+                    v-if="type === 'persistent'"
+                    class="BaseBanner__icon"
+                    data-cy="base-banner-icon-message"
+                />
+                <stars
+                    v-if="type === 'success'"
+                    class="BaseBanner__icon"
+                    data-cy="base-banner-icon-stars"
+                />
+            </div>
 
-      <div class="BaseBanner__text-content">
-        <label
-          class="BaseBanner__text-content-header"
-          data-cy="base-banner-header"
-        >{{ header }}</label>
-        <label
-          v-if="subheader"
-          class="BaseBanner__text-content-subheader"
-          data-cy="base-banner-subheader"
-        >
-          {{ subheader }}
-        </label>
-      </div>
+            <div class="BaseBanner__text-content">
+                <label
+                    class="BaseBanner__text-content-header"
+                    data-cy="base-banner-header"
+                >{{ header }}</label>
+                <label
+                    v-if="subheader"
+                    class="BaseBanner__text-content-subheader"
+                    data-cy="base-banner-subheader"
+                >
+                    {{ subheader }}
+                </label>
+            </div>
+        </div>
+
+        <div class="BaseBanner__right">
+            <base-button
+                v-if="actionText && actionCallback"
+                @click="buttonCallback"
+                class="BaseBanner__action-btn"
+                data-cy="base-banner-action-btn"
+                :size="'md'"
+                :type="'tertiary'"
+            >
+                {{ actionText }}
+            </base-button>
+
+            <button
+                v-if="close"
+                @click="$emit('close-toast')"
+                class="BaseBanner__close-btn"
+                data-cy="base-banner-close-btn"
+            >
+                <x-close
+                    class="BaseBanner__close-icon"
+                    data-cy="base-banner-icon-x-close"
+                />
+            </button>
+        </div>
     </div>
-
-    <div class="BaseBanner__right">
-      <base-button
-        v-if="actionText && actionCallback"
-        @click="buttonCallback"
-        class="BaseBanner__action-btn"
-        data-cy="base-banner-action-btn"
-        :size="'md'"
-        :type="'tertiary'"
-      >
-        {{ actionText }}
-      </base-button>
-
-      <button
-        v-if="close"
-        @click="$emit('close-toast')"
-        class="BaseBanner__close-btn"
-        data-cy="base-banner-close-btn"
-      >
-        <x-close
-          class="BaseBanner__close-icon"
-          data-cy="base-banner-icon-x-close"
-        />
-      </button>
-    </div>
-  </div>
 </template>
 
 <style lang="sass">
