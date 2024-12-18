@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // Packages
+
 import {
     inject,
     ref,
@@ -1378,7 +1379,7 @@ const triggerSuccessToastr = (): void => {
 <style lang="sass">
 .Styleguide
 $block: &
-background-color: $app-bg
+background- color: $app-bg
 padding: $spacing-16
 
 hr
