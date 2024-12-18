@@ -1,9 +1,9 @@
 <template>
-  <div class="BaseBeatLoader">
-    <div class="BaseBeatLoader__beat BaseBeatLoader__beat--one" />
-    <div class="BaseBeatLoader__beat BaseBeatLoader__beat--two" />
-    <div class="BaseBeatLoader__beat BaseBeatLoader__beat--three" />
-  </div>
+    <div class="BaseBeatLoader">
+        <div class="BaseBeatLoader__beat BaseBeatLoader__beat--one" />
+        <div class="BaseBeatLoader__beat BaseBeatLoader__beat--two" />
+        <div class="BaseBeatLoader__beat BaseBeatLoader__beat--three" />
+    </div>
 </template>
 
 <style lang="sass">

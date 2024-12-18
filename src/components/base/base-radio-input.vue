@@ -1,91 +1,91 @@
 <script setup lang="ts">
   // Packages
-  import { ref } from 'vue';
+import { ref } from 'vue';
 
-  const emit = defineEmits([ "update:modelValue" ]);
-  const props = defineProps({
+const emit = defineEmits([ "update:modelValue" ]);
+const props = defineProps({
     disabled: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     label: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     labelFor: {
-      default: '',
-      required: false,
-      type: String,
+        default: '',
+        required: false,
+        type: String,
     },
     supportingLabel: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     supportingLabelFor: {
-      default: '',
-      required: false,
-      type: String,
+        default: '',
+        required: false,
+        type: String,
     },
     value: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
-  });
+});
 
-  const radioID = `${props.labelFor} ${props.supportingLabelFor}`.trim();
-  const radioInputValue = ref(props.value);
+const radioID = `${props.labelFor} ${props.supportingLabelFor}`.trim();
+const radioInputValue = ref(props.value);
 
-  const onChange = () => {
+const onChange = () => {
     if (!props.disabled) {
-      radioInputValue.value = !radioInputValue.value;
-      emit("update:modelValue", radioInputValue.value);
+        radioInputValue.value = !radioInputValue.value;
+        emit("update:modelValue", radioInputValue.value);
     }
-  };
+};
 </script>
 
 <template>
-  <div
-    @click="onChange"
-    :class="['BaseRadioInput', {
-      'BaseRadioInput--disabled': disabled,
-    }]"
-    data-cy="base-radio-input"
-  >
-    <input
-      v-model="radioInputValue"
-      :class="[ 'BaseRadioInput__input', {
-        'BaseRadioInput__input--checked': radioInputValue === true,
-      }]"
-      data-cy="base-radio-input-input"
-      :disabled="disabled"
-      :id="radioID"
-      type="radio"
-      :value="value"
+    <div
+        @click="onChange"
+        :class="['BaseRadioInput', {
+            'BaseRadioInput--disabled': disabled,
+        }]"
+        data-cy="base-radio-input"
     >
-    <div class="BaseRadioInput__labels">
-      <label
-        v-if="label"
-        class="BaseRadioInput__label"
-        data-cy="base-radio-input-label"
-        :for="labelFor"
-      >
-        <slot />
-      </label>
+        <input
+            v-model="radioInputValue"
+            :class="[ 'BaseRadioInput__input', {
+                'BaseRadioInput__input--checked': radioInputValue === true,
+            }]"
+            data-cy="base-radio-input-input"
+            :disabled="disabled"
+            :id="radioID"
+            type="radio"
+            :value="value"
+        >
+        <div class="BaseRadioInput__labels">
+            <label
+                v-if="label"
+                class="BaseRadioInput__label"
+                data-cy="base-radio-input-label"
+                :for="labelFor"
+            >
+                <slot />
+            </label>
 
-      <label
-        v-if="supportingLabel"
-        class="BaseRadioInput__supporting-label"
-        data-cy="base-radio-input-supporting-label"
-        :for="supportingLabelFor"
-      >
-        <slot name="supporting" />
-      </label>
+            <label
+                v-if="supportingLabel"
+                class="BaseRadioInput__supporting-label"
+                data-cy="base-radio-input-supporting-label"
+                :for="supportingLabelFor"
+            >
+                <slot name="supporting" />
+            </label>
+        </div>
     </div>
-  </div>
 </template>
 
 <style lang="sass">

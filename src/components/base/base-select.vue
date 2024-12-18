@@ -1,122 +1,122 @@
 <script setup lang="ts">
   // Packages
-  import vSelect from 'vue-select';
-  import {
+import vSelect from 'vue-select';
+import {
     defineEmits,
     defineProps,
     ref,
     watch,
-  } from "vue";
-  // Components
-  import ChevronDown from '@src/components/svg/chevron-down.vue';
-  import XClose from '@src/components/svg/x-close.vue';
-  // Styles
-  import "vue-select/dist/vue-select.css";
+} from "vue";
+// Components
+import ChevronDown from '@src/components/svg/chevron-down.vue';
+import XClose from '@src/components/svg/x-close.vue';
+// Styles
+import "vue-select/dist/vue-select.css";
 
-  const emit = defineEmits([
+const emit = defineEmits([
     'update:modelValue',
-  ]);
-  const props = defineProps({
+]);
+const props = defineProps({
     clearable: {
-      default: true,
-      required: false,
-      type: Boolean,
+        default: true,
+        required: false,
+        type: Boolean,
     },
     disabled: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     label: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     labelFor: {
-      default: null,
-      required: false,
-      type: String,
+        default: null,
+        required: false,
+        type: String,
     },
     options: {
-      required: true,
-      type: Array,
+        required: true,
+        type: Array,
     },
     placeholder: {
-      default: "Select an option",
-      required: false,
-      type: String,
+        default: "Select an option",
+        required: false,
+        type: String,
     },
     searchable: {
-      default: false,
-      required: false,
-      type: Boolean,
+        default: false,
+        required: false,
+        type: Boolean,
     },
     value: {
-      default: null,
-      required: false,
-      type: Object,
+        default: null,
+        required: false,
+        type: Object,
     },
-  });
+});
 
-  const selectedOption = ref(props.value);
+const selectedOption = ref(props.value);
 
-  // eslint-disable-next-line arrow-body-style
-  watch(() => selectedOption.value, () => {
+// eslint-disable-next-line arrow-body-style
+watch(() => selectedOption.value, () => {
     emit("update:modelValue", selectedOption.value);
-  });
+});
 </script>
 
 <!-- Only render the component when the options as props is a valid array of options -->
 <template>
-  <div
-    class="BaseSelect"
-    data-cy="base-select"
-  >
-    <label
-      v-if="label"
-      class="BaseSelect__label"
-      data-cy="base-select-label"
-      :for="labelFor"
+    <div
+        class="BaseSelect"
+        data-cy="base-select"
     >
-      <slot />
-    </label>
-    <v-select
-      v-model="selectedOption"
-      :class="['BaseSelect__select', {
-        'BaseSelect__select--disabled': disabled,
-      }]"
-      :clearable="clearable"
-      :components="{
-        Deselect: XClose,
-      }"
-      data-cy="base-select-select"
-      :disabled="disabled"
-      :id="labelFor"
-      :options="options"
-      :placeholder="placeholder"
-      :searchable="searchable"
-    >
-      <template #open-indicator>
-        <chevron-down
-          class="BaseSelect__open-indicator-icon"
-          data-cy="base-select-open-indicator-icon"
-        />
-      </template>
+        <label
+            v-if="label"
+            class="BaseSelect__label"
+            data-cy="base-select-label"
+            :for="labelFor"
+        >
+            <slot />
+        </label>
+        <v-select
+            v-model="selectedOption"
+            :class="['BaseSelect__select', {
+                'BaseSelect__select--disabled': disabled,
+            }]"
+            :clearable="clearable"
+            :components="{
+                Deselect: XClose,
+            }"
+            data-cy="base-select-select"
+            :disabled="disabled"
+            :id="labelFor"
+            :options="options"
+            :placeholder="placeholder"
+            :searchable="searchable"
+        >
+            <template #open-indicator>
+                <chevron-down
+                    class="BaseSelect__open-indicator-icon"
+                    data-cy="base-select-open-indicator-icon"
+                />
+            </template>
 
-      <template #option="slotProps">
-        <slot
-          name="option"
-          v-bind="(slotProps as Record<string, unknown>)"
-        />
-      </template>
-      <template #selected-option="slotProps">
-        <slot
-          name="selected-option"
-          v-bind="(slotProps as Record<string, unknown>)"
-        />
-      </template>
-    </v-select>
-  </div>
+            <template #option="slotProps">
+                <slot
+                    name="option"
+                    v-bind="(slotProps as Record<string, unknown>)"
+                />
+            </template>
+            <template #selected-option="slotProps">
+                <slot
+                    name="selected-option"
+                    v-bind="(slotProps as Record<string, unknown>)"
+                />
+            </template>
+        </v-select>
+    </div>
 </template>
 
 <style lang="sass">

@@ -639,8 +639,7 @@ const triggerSuccessToastr = (): void => {
                     class="mb-16"
                 >
                     <div class="Styleguide__typography-header mb-8 pb-4">
-                        <label class="Styleguide__typography-header-label">{{ type.labels.title
-                        }}</label>
+                        <label class="Styleguide__typography-header-label">{{ type.labels.title }}</label>
                         <label class="Styleguide__typography-header-label">
                             {{ generateTypographyHeader(type) }}
                         </label>
