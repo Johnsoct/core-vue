@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // Packages
+
 import {
     inject,
     ref,
@@ -639,8 +640,7 @@ const triggerSuccessToastr = (): void => {
                     class="mb-16"
                 >
                     <div class="Styleguide__typography-header mb-8 pb-4">
-                        <label class="Styleguide__typography-header-label">{{ type.labels.title
-                        }}</label>
+                        <label class="Styleguide__typography-header-label">{{ type.labels.title }}</label>
                         <label class="Styleguide__typography-header-label">
                             {{ generateTypographyHeader(type) }}
                         </label>
@@ -1379,7 +1379,7 @@ const triggerSuccessToastr = (): void => {
 <style lang="sass">
 .Styleguide
 $block: &
-background-color: $app-bg
+background- color: $app-bg
 padding: $spacing-16
 
 hr
