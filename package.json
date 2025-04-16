@@ -1,9 +1,10 @@
 {
     "name": "@chrisjohnsoct/core-vue",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "private": false,
     "publishConfig": {
-        "@chrisjohnsoct:registry": "https://npm.pkg.github.com"
+        "access": "public",
+        "@registry:chrisjohnsoct": "https://registry.npmjs.org"
     },
     "type": "module",
     "files": [
@@ -21,6 +22,8 @@
         "coverage": "vitest run --coverage",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
         "preview": "vite preview",
+        "site:build": "vite build --outDir dist/site site",
+        "site:preview": "npm run build && npm run site:build && vite preview --outDir dist/site --base core-vue",
         "test:unit": "vitest",
         "test:component": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --component'",
         "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
