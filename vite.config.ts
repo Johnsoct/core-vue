@@ -9,14 +9,14 @@ export default defineConfig({
     base: '/core-vue/',
 
     build: {
-        emptyOutDir: true,
-        //lib: {
-        //    entry: path.resolve(__dirname, 'src/main.ts'),
-        //    // Enables treeshaking for individual component importing
-        //    fileName: 'index',
-        //    formats: [ 'es' ],
-        //},
-        outDir: 'dist/site',
+        emptyOutDir: false,
+        lib: {
+            entry: path.resolve(__dirname, 'src/main.ts'),
+            // Enables treeshaking for individual component importing
+            fileName: 'index',
+            formats: [ 'es' ],
+        },
+        outDir: 'dist/lib',
         minify: 'esbuild',
         rollupOptions: {
             // Prevent vue from being bundled with the final build
@@ -35,7 +35,7 @@ export default defineConfig({
         copy({
             targets: [
                 {
-                    dest: 'dist/',
+                    dest: 'dist/lib/styles',
                     src: 'src/styles',
                 },
             ],

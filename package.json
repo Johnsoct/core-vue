@@ -22,7 +22,7 @@
         "coverage": "vitest run --coverage",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
         "preview": "vite preview",
-        "site:build": "vite build --outDir dist/site",
+        "site:build": "vite build --config vite.site.config.ts --outDir dist/site",
         "site:preview": "npm run build && npm run site:build && vite preview --outDir dist/site --base core-vue",
         "test:unit": "vitest",
         "test:component": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --component'",
