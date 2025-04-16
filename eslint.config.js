@@ -109,7 +109,7 @@ const tsConfig = [
             "**/cypress",
             '*.d.ts',
             '**/coverage',
-            '**/dist',
+            '**/dist/*',
             '*.config.{js,ts}',
         ],
         languageOptions: {

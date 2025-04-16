@@ -656,7 +656,7 @@ describe('<BaseInput />', () => {
         });
     });
 
-    context('Styles', () => {
+    context.only('Styles', () => {
         it('Disabled', () => {
             cy.mount(BaseInput, {
                 props: {

@@ -44,9 +44,9 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '@cypress': path.resolve(__dirname, './cypress'),
-            '@src': path.resolve(__dirname, './src'),
-            '@ts': path.resolve(__dirname, './types'),
+            '@cypress': path.resolve(__dirname, 'cypress'),
+            '@src': path.resolve(__dirname, 'src'),
+            '@ts': path.resolve(__dirname, 'types'),
         },
     },
 });

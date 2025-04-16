@@ -272,20 +272,6 @@ const toggleInputType = (): void => {
     position: relative;
     width: rems(250px);
 
-    &[disabled],
-    &[aria-disabled="true"] {
-        color: $secondary-25-color;
-        pointer-events: none;
-    }
-
-    &:focus {
-        box-shadow: rems(0px) rems(0px) rems(0px) rems(4px) rgba(227, 236, 235, 1), $box-shadow-inputs;
-    }
-
-    &::placeholder {
-        color: $secondary-25-color;
-    }
-
     // Prevent 1Password from displaying their icon on every input
     // :global(com-1password-button)
     //   display: none
@@ -322,8 +308,30 @@ const toggleInputType = (): void => {
         box-shadow: $box-shadow-inputs;
         color: $secondary-900-bg;
         outline: none;
-            padding: $spacing-2 $spacing-3;
-            width: 100%;
+        padding: $spacing-2 $spacing-3;
+        width: 100%;
+
+        &::placeholder {
+            color: $secondary-25-color;
+        }
+
+        &[disabled],
+        &[aria-disabled="true"] {
+            color: $secondary-25-color;
+            pointer-events: none;
+        }
+
+        &:focus {
+            box-shadow: rems(0px) rems(0px) rems(0px) rems(4px) rgba(227, 236, 235, 1), $box-shadow-inputs;
+        }
+
+        &--borderless {
+            border: none;
+        }
+
+        &--error {
+            border-color: $error-300-bg;
+        }
     }
 
     &__label {
@@ -346,14 +354,6 @@ const toggleInputType = (): void => {
         right: rems(0px);
         stroke: $secondary-25-color;
         width: rems(14px);
-    }
-
-    &--error {
-        border-color: $error-300-bg;
-    }
-
-    &--borderless {
-        border: none;
     }
 }
 </style>
