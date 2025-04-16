@@ -29,14 +29,6 @@ export default defineConfig({
     },
   },
 
-  css: {
-    preprocessorOptions: {
-      sass: {
-        additionalData: `@import "src/styles/base/_index.scss"`,
-      },
-    },
-  },
-
   plugins: [
     vue(),
     copy({
