@@ -10,12 +10,12 @@ export default defineConfig({
 
     build: {
         emptyOutDir: true,
-        lib: {
-            entry: path.resolve(__dirname, 'src/main.ts'),
-            // Enables treeshaking for individual component importing
-            fileName: 'index',
-            formats: [ 'es' ],
-        },
+        //lib: {
+        //    entry: path.resolve(__dirname, 'src/main.ts'),
+        //    // Enables treeshaking for individual component importing
+        //    fileName: 'index',
+        //    formats: [ 'es' ],
+        //},
         outDir: 'dist/site',
         minify: 'esbuild',
         rollupOptions: {
