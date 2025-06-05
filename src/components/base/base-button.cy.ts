@@ -153,6 +153,7 @@ describe('<BaseButton />', () => {
                     .get(BASE_BUTTON.icons.ellipsis)
                     .then(($ellipsisBg) => {
 
+                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                         expect($ellipsisBg).to.exist;
 
                         cy
@@ -391,6 +392,7 @@ describe('<BaseButton />', () => {
             cy
                 .getMounted()
                 .then((wrapper) => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     expect(wrapper.emitted('click')).to.be.undefined;
                 });
         });
@@ -412,6 +414,7 @@ describe('<BaseButton />', () => {
             cy
                 .getMounted()
                 .then((wrapper) => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     expect(wrapper.emitted('click')).to.be.undefined;
                 });
         });

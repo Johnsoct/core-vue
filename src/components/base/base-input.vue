@@ -253,9 +253,12 @@ const toggleInputType = (): void => {
         return;
     }
      
-    localType.value === 'password'
-        ? localType.value = 'text'
-        : localType.value = 'password';
+    if (localType.value === 'password') {
+        localType.value = 'text';
+    }
+    else {
+        localType.value = 'password';
+    }
 };
 </script>
 

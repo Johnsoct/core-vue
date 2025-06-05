@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <main class="Styleguide">
         <div class="Styleguide__section">

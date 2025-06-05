@@ -1,6 +1,5 @@
 // Packages
 import {
-  type CyMountOptions,
   mount,
 } from 'cypress/vue';
 import {
