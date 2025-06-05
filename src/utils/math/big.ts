@@ -3,7 +3,6 @@ import Big from 'big.js';
 
 /*
  * IMPORTANT NOTES:
- * Research into Big.js: https://bobtail.atlassian.net/browse/SM-462
  *
  * The only times we don't deal in Big.js instances:
  *
