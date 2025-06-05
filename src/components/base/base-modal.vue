@@ -1,34 +1,3 @@
-<script setup lang="ts">
-  // Components
-import XClose from '@src/components/svg/x-close.vue';
-
-const emits = defineEmits([
-    'close-modal',
-]);
-const props = defineProps({
-    header: {
-        required: true,
-        type: String,
-    },
-    isClosable: {
-        default: true,
-        required: false,
-        type: Boolean,
-    },
-    subheader: {
-        default: null,
-        required: false,
-        type: String,
-    },
-});
-
-const onClose = () => {
-    if (props.isClosable) {
-        emits("close-modal");
-    }
-};
-</script>
-
 <template>
     <div
         class="BaseModal"
@@ -64,7 +33,7 @@ const onClose = () => {
                 </div>
 
                 <button class="BaseModal__close-icon-btn">
-                    <x-close
+                    <x-close-icon
                         v-if="isClosable"
                         @click="onClose"
                         class="BaseModal__close-icon"
@@ -82,6 +51,37 @@ const onClose = () => {
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+  // Components
+import XCloseIcon from '@src/components/svg/x-close-icon.vue';
+
+const emits = defineEmits([
+    'close-modal',
+]);
+const props = defineProps({
+    header: {
+        required: true,
+        type: String,
+    },
+    isClosable: {
+        default: true,
+        required: false,
+        type: Boolean,
+    },
+    subheader: {
+        default: null,
+        required: false,
+        type: String,
+    },
+});
+
+const onClose = () => {
+    if (props.isClosable) {
+        emits("close-modal");
+    }
+};
+</script>
 
 <style lang="sass">
 .BaseModal

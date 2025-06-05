@@ -8,6 +8,7 @@ import * as components from '@src/components';
 import Styleguide from '@src/Styleguide.vue';
 // Plugins
 import { ToastrPlugin } from '@src/utils/plugins/toastr';
+
 // Styles
 import '@src/styles/main.scss';
 

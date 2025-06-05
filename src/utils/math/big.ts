@@ -36,32 +36,32 @@ Big.RM = 1;
 // For presentation of values to the user
 // BE and FE used function
 const convertBigToDollars = (big: Big): string => {
-  return big
-    .div(100)
-    .toFixed(2);
+    return big
+        .div(100)
+        .toFixed(2);
 };
 
 // For conversion of Big to pennies for submitting values to BE
 // BE and FE used function
 const convertBigToPennies = (big: Big): string => {
-  return big
-    .toFixed(0);
+    return big
+        .toFixed(0);
 };
 
 // For conversion of user input to big instances for calculating on the FE for other values
 // BE and FE used function (Watchdog reads from QB)
 const convertDollarsToBig = (dollars: string): Big => {
-  return Big(dollars)
-    .times(100);
+    return Big(dollars)
+        .times(100);
 };
 
 const convertPenniesToBig = (pennies: string): Big => {
-  return Big(pennies);
+    return Big(pennies);
 };
 
 export {
-  convertBigToDollars,
-  convertBigToPennies,
-  convertDollarsToBig,
-  convertPenniesToBig,
+    convertBigToDollars,
+    convertBigToPennies,
+    convertDollarsToBig,
+    convertPenniesToBig,
 };

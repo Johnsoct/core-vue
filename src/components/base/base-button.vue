@@ -1,3 +1,27 @@
+<template>
+    <button
+        @click="clickHandler"
+        :aria-disabled="disabled"
+        :class="`BaseButton BaseButton--${size} BaseButton--${type}`"
+        data-cy="base-button"
+        :disabled="disabled"
+    >
+        <ring-icon
+            v-if="icon === 'ring'"
+            class="BaseButton__icon"
+            data-cy="base-button-icon-default"
+        />
+        <div
+            v-if="loading"
+            class="BaseButton__loading-bg"
+            data-cy="base-button-loader"
+        >
+            <base-beat-loader class="BaseButton__loader" />
+        </div>
+        <slot />
+    </button>
+</template>
+
 <script setup lang="ts">
 // Packages
 import {
@@ -6,7 +30,7 @@ import {
 } from 'vue';
 // Components
 import BaseBeatLoader from '@src/components/base/base-beat-loader.vue';
-import Ring from '@src/components/svg/ring.vue';
+import RingIcon from '@src/components/svg/ring-icon.vue';
 
 const emits = defineEmits([
     'click',
@@ -61,7 +85,7 @@ const props = defineProps({
 
 const loading = ref(props.loading);
 
-// eslint-disable-next-line arrow-body-style
+ 
 watch(() => props.loading, () => {
     if (props.loading) {
         loading.value = true;
@@ -81,30 +105,6 @@ const clickHandler = ($event: Event): void => {
     }
 };
 </script>
-
-<template>
-    <button
-        @click="clickHandler"
-        :aria-disabled="disabled"
-        :class="`BaseButton BaseButton--${size} BaseButton--${type}`"
-        :disabled="disabled"
-        data-cy="base-button"
-    >
-        <ring
-            v-if="icon === 'ring'"
-            class="BaseButton__icon"
-            data-cy="base-button-icon-default"
-        />
-        <div
-            v-if="loading"
-            class="BaseButton__loading-bg"
-            data-cy="base-button-loader"
-        >
-            <base-beat-loader class="BaseButton__loader" />
-        </div>
-        <slot />
-    </button>
-</template>
 
 <style lang="sass">
 .BaseButton

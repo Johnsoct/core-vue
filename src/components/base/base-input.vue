@@ -1,3 +1,63 @@
+<template>
+    <div class="BaseInput">
+        <label
+            v-if="label"
+            class="BaseInput__label"
+            data-cy="base-input-label"
+            :for="labelFor"
+        >
+            <slot />
+        </label>
+        <input
+            @focusout="setAbandonedRequiredInputInvalid"
+            @input="emitInput"
+            autocomplete="off"
+            :class="['BaseInput__input fs-14', {
+                'BaseInput__input--borderless': borderless && localValid,
+                'BaseInput__input--error': !localValid,
+                'BaseInput__input--hint': hint,
+            }]"
+            data-cy="base-input-input"
+            :disabled="disabled"
+            :id="labelFor"
+            :maxlength="maxLength"
+            :minlength="minLength"
+            :placeholder="placeholder"
+            :type="localType"
+            :value="modelValue"
+        >
+        <alert-circle-icon
+            v-if="!localValid"
+            class="BaseInput__error-icon"
+            data-cy="base-input-error-icon"
+        />
+        <eye-icon
+            v-if="type === 'password'"
+            @click="toggleInputType"
+            class="BaseInput__view-icon"
+            data-cy="base-input-password-view-icon"
+        />
+        <transition name="Transition__fade">
+            <label
+                v-if="!localValid"
+                class="BaseInput__error-label"
+                data-cy="base-input-instructions"
+            >
+                {{ instructions }}
+            </label>
+        </transition>
+        <transition name="Transition__fade">
+            <label
+                v-if="hint"
+                class="BaseInput__hint-label"
+                data-cy="base-input-hint"
+            >
+                {{ hint }}
+            </label>
+        </transition>
+    </div>
+</template>
+
 <script setup lang="ts">
   // Packages
 import {
@@ -12,8 +72,8 @@ import {
     convertDollarsToBig,
 } from '@src/utils/math/big';
 // Components
-import AlertCircle from '@src/components/svg/alert-circle.vue';
-import Eye from '@src/components/svg/eye.vue';
+import AlertCircleIcon from '@src/components/svg/alert-circle-icon.vue';
+import EyeIcon from '@src/components/svg/eye-icon.vue';
 // Types
 import type {
     BaseInputCurrencyEmit,
@@ -192,72 +252,12 @@ const toggleInputType = (): void => {
     if (originalType !== 'password') {
         return;
     }
-    // eslint-disable-next-line no-unused-expressions
+     
     localType.value === 'password'
         ? localType.value = 'text'
         : localType.value = 'password';
 };
 </script>
-
-<template>
-    <div class="BaseInput">
-        <label
-            v-if="label"
-            class="BaseInput__label"
-            data-cy="base-input-label"
-            :for="labelFor"
-        >
-            <slot />
-        </label>
-        <input
-            @focusout="setAbandonedRequiredInputInvalid"
-            @input="emitInput"
-            autocomplete="off"
-            :class="['BaseInput__input fs-14', {
-                'BaseInput__input--borderless': borderless && localValid,
-                'BaseInput__input--error': !localValid,
-                'BaseInput__input--hint': hint,
-            }]"
-            data-cy="base-input-input"
-            :disabled="disabled"
-            :id="labelFor"
-            :maxlength="maxLength"
-            :minlength="minLength"
-            :placeholder="placeholder"
-            :type="localType"
-            :value="modelValue"
-        >
-        <alert-circle
-            v-if="!localValid"
-            class="BaseInput__error-icon"
-            data-cy="base-input-error-icon"
-        />
-        <eye
-            v-if="type === 'password'"
-            @click="toggleInputType"
-            class="BaseInput__view-icon"
-            data-cy="base-input-password-view-icon"
-        />
-        <transition name="Transition__fade">
-            <label
-                v-if="!localValid"
-                class="BaseInput__error-label"
-                data-cy="base-input-instructions"
-            >
-                {{ instructions }}
-            </label>
-        </transition>
-        <transition name="Transition__fade">
-            <label
-                v-if="hint"
-                class="BaseInput__hint-label"
-                data-cy="base-input-hint"
-            >
-                {{ hint }}
-            </label>
-        </transition>
-    </div>
-</template>
 
 <style lang="sass">
 .BaseInput
