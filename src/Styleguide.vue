@@ -1536,14 +1536,14 @@ const triggerSuccessToastr = (): void => {
         #{$block}__spacing-table-column,
         &:last-child {
             border-radius: $border-radius;
-            border-top: 1px dashed rgba(123, 97, 255, 1);
+            border-top: 1px dashed rgb(123 97 255 / 100%);
         }
 
         #{$block}__spacing-table-row:last-child,
         #{$block}__spacing-table-column,
         &:last-child {
             border-radius: $border-radius;
-            border-bottom: 1px dashed rgba(123, 97, 255, 1);
+            border-bottom: 1px dashed rgb(123 97 255 / 100%);
         }
     }
 
@@ -1564,18 +1564,12 @@ const triggerSuccessToastr = (): void => {
         }
 
         &:nth-child(4) {
-            border-left: 1px dashed rgba(123, 97, 255, 1);
-            border-right: 1px dashed rgba(123, 97, 255, 1);
+            border-left: 1px dashed rgb(123 97 255 / 100%);
+            border-right: 1px dashed rgb(123 97 255 / 100%);
             padding: $spacing-4;
             position: relative;
             width: 300px;
         }
-    }
-
-    label {
-        @include text-xs;
-        color: $primary-700-bg;
-        padding: 0 $spacing-1;
     }
 
     &__spacing-table-row {
@@ -1588,9 +1582,8 @@ const triggerSuccessToastr = (): void => {
         left: rems(16px);
         top: rems(13.5px);
         z-index: -1;
+
         /* Reset the default appearance */
-        -webkit-appearance: none;
-        -moz-appearance: none;
         appearance: none;
         border: none;
         border-radius: 0;
@@ -1608,7 +1601,7 @@ const triggerSuccessToastr = (): void => {
     }
 
     &::-webkit-progress-value {
-        background-color: rgba(158, 119, 237, 0.1);
+        background-color: rgb(158 119 237 / 10%);
     }
 
     &__subtitle {
