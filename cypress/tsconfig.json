@@ -1,33 +1,34 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es6",
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    /* If transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
-    "module": "es2022",
-    "paths": {
-      "@cypress/*": [
-        "./*"
-      ],
-      "@src/*": [
-        "../src/*"
-      ],
-      "@ts/*": [
-        "../types/*"
-      ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "es6",
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        /* If transpiling with TypeScript: */
+        "moduleResolution": "Bundler",
+        "module": "es2022",
+        "paths": {
+            "@cypress/*": [
+                "./*"
+            ],
+            "@src/*": [
+                "../src/*"
+            ],
+            "@ts/*": [
+                "../types/*"
+            ]
+        },
+        "types": [
+            "cypress",
+            "node",
+            "../cypress.d.ts"
+        ]
     },
-    "types": [
-      "cypress",
-      "node",
-      "../cypress.d.ts",
+    "include": [
+        "**/*.ts",
+        "**/*.cy.ts",
+        "../cypress.d.ts"
     ]
-  },
-  "include": [
-    "**/*.ts",
-    "../cypress.d.ts",
-  ]
 }

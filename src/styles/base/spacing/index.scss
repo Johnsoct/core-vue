@@ -1,2 +1,2 @@
-@import './box.sass';
-@import './containers.sass';
+@forward './box';
+@forward './containers';

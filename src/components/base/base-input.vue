@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-  // Packages
+// Packages
 import {
     ref,
     watch,
@@ -213,17 +213,17 @@ const emitInput = ($event: Event): void => {
     }
 
     /*
-      * For instances where we're capturing user input representing a financial value
-      * (dollars), we want to use a single component (single source of truth) and a
-      * single function to clean that user input of all input that we don't want when
-      * converting the user input to a big instance
-      *
-      * If the "currency" prop isn't true, then nothing is different; We're simply emitting
-      * the user input.
-      *
-      * If the "currency" prop is true, we're cleaning the user input and emitting an object
-      * with the cleaned user input and the clean input as a big instance.
-      */
+     * For instances where we're capturing user input representing a financial value
+     * (dollars), we want to use a single component (single source of truth) and a
+     * single function to clean that user input of all input that we don't want when
+     * converting the user input to a big instance
+     *
+     * If the "currency" prop isn't true, then nothing is different; We're simply emitting
+     * the user input.
+     *
+     * If the "currency" prop is true, we're cleaning the user input and emitting an object
+     * with the cleaned user input and the clean input as a big instance.
+     */
     const userInput: string = ($event.target as HTMLInputElement).value.trim();
     const userInputCurrencyValue: BaseInputCurrencyEmit = getCurrencyValueFromUserInput(userInput);
 
@@ -262,74 +262,101 @@ const toggleInputType = (): void => {
 };
 </script>
 
-<style lang="sass">
-.BaseInput
-  +flex($direction: column)
-  position: relative
-  width: rems(250px)
+<style lang="scss">
+@use "../../styles/base/colors" as *;
+@use "../../styles/base/constants" as *;
+@use "../../styles/base/functions" as *;
+@use "../../styles/base/mixins" as *;
+@use "../../styles/base/typography" as *;
+@use "../../styles/base/spacing/box" as *;
 
-  // Prevent 1Password from displaying their icon on every input
-  // :global(com-1password-button)
-  //   display: none
+.BaseInput {
+    @include flex($direction: column);
+    position: relative;
+    width: rems(250px);
 
-  &__error-icon
-    height: rems(14px)
-    position: absolute
-    right: rems(14px)
-    stroke: $error-500-bg
-    top: rems(37.5px) // Height of label + ((Height of input / 2) - height of icon) + 1/2 of height of icon
-    width: rems(14px)
+    // Prevent 1Password from displaying their icon on every input
+    // :global(com-1password-button)
+    //   display: none
 
-  &__error-label
-    +text-sm
-    color: $error-500-bg
-    margin-top: $spacing-2
+    &__error-icon {
+        background-color: $base-white;
+        // Height of label + ((Height of input / 2) - height of icon) + 1/2 of height of icon
+        // (18.75+10)+(47/2)-(17.5/2)
+        bottom: rems(35.5px);
+        height: rems(14px);
+        padding: 0 rems(2px);
+        position: absolute;
+        right: rems(0px);
+        stroke: $error-500-bg;
+        width: rems(14px);
+    }
 
-  &__hint-label
-    +text-sm
-    color: $secondary-600-bg
-    margin-top: $spacing-2
+    &__error-label {
+        @include text-sm;
+        color: $error-500-bg;
+        margin-top: $spacing-2;
+    }
 
-  &__input
-    +text-md
-    border: rems(1px) solid $border
-    border-radius: $border-radius
-    box-shadow: $box-shadow-inputs
-    color: $secondary-900-bg
-    outline: none
-    padding: $spacing-2 $spacing-3
-    width: 100%
+    &__hint-label {
+        @include text-sm;
+        color: $secondary-600-bg;
+        margin-top: $spacing-2;
+    }
 
-    &[disabled],
-    &[aria-disabled="true"]
-      color: $secondary-25-color
-      pointer-events: none
+    &__input {
+        @include text-md;
+        border: rems(1px) solid $border;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow-inputs;
+        color: $secondary-900-bg;
+        outline: none;
+        padding: $spacing-2 $spacing-3;
+        width: 100%;
 
-    &:focus
-      box-shadow: rems(0px) rems(0px) rems(0px) rems(4px) rgba(227, 236, 235, 1), $box-shadow-inputs
+        &::placeholder {
+            color: $secondary-25-color;
+        }
 
-    &::placeholder
-      color: $secondary-25-color
+        &[disabled],
+        &[aria-disabled="true"] {
+            color: $secondary-25-color;
+            pointer-events: none;
+        }
 
-    &--error
-      border-color: $error-300-bg
+        &:focus {
+            box-shadow: rems(0px) rems(0px) rems(0px) rems(4px) rgba(227, 236, 235, 1), $box-shadow-inputs;
+        }
 
-  &--borderless
-    border: none
+        &--borderless {
+            border: none;
+        }
 
-  &__label
-    +text-sm
-    color: $secondary-700-bg
-    font-weight: $fw-medium
-    margin-bottom: $spacing-2
-    user-select: none
+        &--error {
+            border-color: $error-300-bg;
+        }
+    }
 
-  &__view-icon
-    cursor: pointer
-    height: rems(14px)
-    position: absolute
-    right: rems(14px)
-    stroke: $secondary-25-color
-    top: rems(37.5px) // Height of label + ((Height of input / 2) - height of icon) + 1/2 of height of icon
-    width: rems(14px)
+    &__label {
+        @include text-sm;
+        color: $secondary-700-bg;
+        font-weight: $fw-medium;
+        margin-bottom: $spacing-2;
+        user-select: none;
+    }
+
+    &__view-icon {
+        background-color: $base-white;
+        // ((Height of input / 2) - height of icon) + 1/2 of height of icon
+        // (47/2)-(17.5/2)
+        bottom: rems(11px);
+        cursor: pointer;
+        height: rems(14px);
+        padding: 0 rems(2px);
+        position: absolute;
+        right: rems(0px);
+        stroke: $secondary-25-color;
+        width: rems(14px);
+    }
+}
 </style>

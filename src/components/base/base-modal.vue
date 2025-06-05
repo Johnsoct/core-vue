@@ -83,65 +83,74 @@ const onClose = () => {
 };
 </script>
 
-<style lang="sass">
-.BaseModal
-  +flex($align: center, $justify: center)
-  background-color: rgba(0, 0, 0, 0.2)
-  height: 100vh
-  overflow: auto
-  position: static
-  width: 100vw
-  z-index: 6
+<style lang="scss">
+@use "../../styles/base/colors" as *;
+@use "../../styles/base/constants" as *;
+@use "../../styles/base/functions" as *;
+@use "../../styles/base/mixins" as *;
+@use "../../styles/base/typography" as *;
+@use "../../styles/base/spacing/box" as *;
 
-  &__bottom
-    +flex()
-    margin-top: $spacing-8
+.BaseModal {
+    @include flex($align: center, $justify: center);
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    overflow: auto;
+    position: static;
+    width: 100vw;
+    z-index: 6;
 
-  &__close-icon
-    cursor: pointer
-    stroke: $secondary-25-color
-
-  &__close-icon-btn
-    +flex($justify: center, $align: center)
-    background-color: transparent
-    border: 0
-    cursor: pointer
-    padding: $spacing-2
-
-  &__modal
-    background-color: white
-    border-radius: $border-radius
-    box-shadow: rems(0px) rems(8px) rems(8px) rems(-4px) rgba(16, 24, 40, 0.03), rems(0px) rems(20px) rems(24px) rems(-4px) rgba(16, 24, 40, 0.08)
-    margin: auto
-    min-width: rems(300px)
-    padding: $spacing-6
-
-  &__text-content
-    +flex($direction: column)
-
-  &__text-content-header
-    +text-lg
-    color: $secondary-900-bg
-    font-weight: $fw-semi-bold
-    margin-top: $spacing-2
-
-  &__text-content-icon
-    +flex($align: center, $justify: center)
-    border: rems(1px) solid $border
-    border-radius: $border-radius
-    box-shadow: $box-shadow-inputs
-    height: rems(48px)
-    margin-bottom: $spacing-2
-    width: rems(48px)
-
-    svg
-      height: rems(24px)
-
-  &__text-content-subheader
-    +text-sm
-    color: $secondary-600-bg
-    margin-top: $spacing-1
-
-  &__top
-    +flex($justify: space-between)
+    &__bottom {
+        @include flex();
+        margin-top: $spacing-8;
+    }
+    &__close-icon {
+        cursor: pointer;
+        stroke: $secondary-25-color;
+    }
+    &__close-icon-btn {
+        @include flex($justify: center, $align: center);
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        padding: $spacing-2;
+    }
+    &__modal {
+        background-color: white;
+        border-radius: $border-radius;
+        box-shadow: rems(0px) rems(8px) rems(8px) rems(-4px) rgba(16, 24, 40, 0.03), rems(0px) rems(20px) rems(24px) rems(-4px) rgba(16, 24, 40, 0.08);
+        margin: auto;
+        min-width: rems(300px);
+        padding: $spacing-6;
+    }
+    &__text-content {
+        @include flex($direction: column);
+    }
+    &__text-content-header {
+        @include text-lg;
+        color: $secondary-900-bg;
+        font-weight: $fw-semi-bold;
+        margin-top: $spacing-2;
+    }
+    &__text-content-icon {
+        @include flex($align: center, $justify: center);
+        border: rems(1px) solid $border;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow-inputs;
+        height: rems(48px);
+        margin-bottom: $spacing-2;
+        width: rems(48px);
+    }
+    svg {
+        height: rems(24px);
+    }
+    &__text-content-subheader {
+        @include text-sm;
+        color: $secondary-600-bg;
+        margin-top: $spacing-1;
+    }
+    &__top {
+        @include flex($justify: space-between);
+    }
+}
 </style>

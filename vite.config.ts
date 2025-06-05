@@ -6,18 +6,18 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/core-vue/',
+
     build: {
         emptyOutDir: false,
-
         lib: {
             entry: path.resolve(__dirname, 'src/main.ts'),
             // Enables treeshaking for individual component importing
             fileName: 'index',
             formats: [ 'es' ],
         },
-
-        minify: true,
-
+        minify: 'esbuild',
+        outDir: 'dist/lib',
         rollupOptions: {
             // Prevent vue from being bundled with the final build
             external: [ 'vue' ],
@@ -27,14 +27,7 @@ export default defineConfig({
                 },
             },
         },
-    },
-
-    css: {
-        preprocessorOptions: {
-            sass: {
-                additionalData: `@import "src/styles/base/_index.scss"`,
-            },
-        },
+        target: 'modules',
     },
 
     plugins: [
@@ -42,7 +35,7 @@ export default defineConfig({
         copy({
             targets: [
                 {
-                    dest: 'dist/',
+                    dest: 'dist/lib/styles',
                     src: 'src/styles',
                 },
             ],
@@ -51,9 +44,9 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '@cypress': path.resolve(__dirname, './cypress'),
-            '@src': path.resolve(__dirname, './src'),
-            '@ts': path.resolve(__dirname, './types'),
+            '@cypress': path.resolve(__dirname, 'cypress'),
+            '@src': path.resolve(__dirname, 'src'),
+            '@ts': path.resolve(__dirname, 'types'),
         },
     },
 });

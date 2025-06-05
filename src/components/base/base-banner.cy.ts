@@ -1,6 +1,6 @@
 // Components
-import BaseBanner from '@src/components/base/base-banner.vue';
-import Styleguide from '@src/Styleguide.vue';
+import BaseBanner from './base-banner.vue';
+import Styleguide from '../../Styleguide.vue';
 // helpers
 import {
     BASE_BANNER,

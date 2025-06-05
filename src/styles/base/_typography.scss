@@ -1,0 +1,283 @@
+@use 'constants' as *;
+@use 'functions' as *;
+
+$base: 16px;
+$letter-spacing-percent: 0.02rem;
+$mobile: 18px;
+$ratio: 1.25;
+
+// Typography functions and mixins
+@import 'https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap';
+
+
+$fw-normal: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$display-2xl-font-size: 72px;
+$display-xl-font-size: 60px;
+$display-lg-font-size: 48px;
+$display-md-font-size: 36px;
+$display-sm-font-size: 30px;
+$display-xs-font-size: 24px;
+$text-xl-font-size: 20px;
+$text-lg-font-size: 18px;
+$text-md-font-size: 16px;
+$text-sm-font-size: 14px;
+$text-xs-font-size: 12px;
+
+// TODO: add variables for line-heights if we aren't going to follow a fixed ratio between size and line-height
+
+@mixin font-family {
+  font-family: 'Inter', sans-serif;
+}
+
+@mixin display-2xl {
+  font-size: rems($display-2xl-font-size);
+  letter-spacing: $letter-spacing-percent;
+  line-height: rems($display-2xl-font-size * $ratio);
+}
+
+@mixin display-xl {
+  font-size: rems($display-xl-font-size);
+  letter-spacing: $letter-spacing-percent;
+  line-height: rems($display-xl-font-size * $ratio);
+}
+
+@mixin display-lg {
+  font-size: rems($display-lg-font-size);
+  letter-spacing: $letter-spacing-percent;
+  line-height: rems($display-lg-font-size * $ratio);
+}
+
+@mixin display-md {
+  font-size: rems($display-md-font-size);
+  letter-spacing: $letter-spacing-percent;
+  line-height: rems($display-md-font-size * $ratio);
+}
+
+@mixin display-sm {
+  font-size: rems($display-sm-font-size);
+  line-height: rems($display-sm-font-size * $ratio);
+}
+
+@mixin display-xs {
+  font-size: rems($display-xs-font-size);
+  line-height: rems($display-xs-font-size * $ratio);
+}
+
+@mixin text-xl {
+  font-size: rems($text-xl-font-size);
+  line-height: rems($text-xl-font-size * $ratio);
+}
+
+@mixin text-lg {
+  font-size: rems($text-lg-font-size);
+  line-height: rems($text-lg-font-size * $ratio);
+}
+
+@mixin text-md {
+  font-size: rems($text-md-font-size);
+  line-height: rems($text-md-font-size * $ratio);
+}
+
+@mixin text-sm {
+  font-size: rems($text-sm-font-size);
+  line-height: rems($text-sm-font-size * $ratio);
+}
+
+@mixin text-xs {
+  font-size: rems($text-xs-font-size);
+  line-height: rems($text-xs-font-size * $ratio);
+}
+
+html,
+body {
+    font-size: $base;
+}
+
+a,
+blockquote,
+button,
+div,
+figcaption,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+label,
+li,
+p,
+span,
+textarea,
+time {
+  @include font-family;
+  font-weight: $fw-normal;
+  margin: 0;
+  padding: 0;
+}
+
+p,
+a,
+li,
+figcaption,
+label,
+blockquote,
+hr,
+span {
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+button {
+  @include text-md;
+}
+
+h1 {
+  @include display-2xl;
+
+  @media #{$tablet-large-and-down} {
+    @include display-lg;
+  }
+}
+
+h2 {
+  @include display-xl;
+
+  @media #{$tablet-large-and-down} {
+    @include display-md;
+  }
+}
+
+h3 {
+  @include display-lg;
+
+  @media #{$tablet-large-and-down} {
+    @include display-sm;
+  }
+}
+
+h4 {
+  @include display-md;
+
+  @media #{$tablet-large-and-down} {
+    @include display-xs;
+  }
+}
+
+h5 {
+  @include display-sm;
+
+  @media #{$tablet-large-and-down} {
+    @include text-xl;
+  }
+}
+
+h6 {
+  @include display-xs;
+
+  @media #{$tablet-large-and-down} {
+    @include text-lg;
+  }
+}
+
+.subtitle-1 {
+  @include text-xl;
+
+  @media #{$tablet-large-and-down} {
+    @include text-md;
+  }
+}
+
+.subtitle-2 {
+  @include text-lg;
+
+  @media #{$tablet-large-and-down} {
+    @include text-sm;
+  }
+}
+
+.body-1 {
+  @include text-sm;
+}
+
+.body-2 {
+  @include text-xs;
+}
+
+// Font-weights
+
+.fw-bold {
+  font-weight: $fw-bold;
+}
+
+.fw-med {
+  font-weight: $fw-medium;
+}
+
+.fw-reg {
+  font-weight: $fw-normal;
+}
+
+.fw-semi-bold {
+  font-weight: $fw-semi-bold;
+}
+
+// Font modifiers
+
+.capitalize {
+  text-transform: capitalize !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.def-lh {
+  line-height: 1;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.no-cap {
+  text-transform: none !important;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+}

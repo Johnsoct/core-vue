@@ -6,42 +6,56 @@
     </div>
 </template>
 
-<style lang="sass">
-.BaseBeatLoader
-  +flex($align: center, $justify: center)
+<style lang="scss">
+@use "../../styles/base/colors" as *;
+@use "../../styles/base/functions" as *;
+@use "../../styles/base/mixins" as *;
+@use "../../styles/base/spacing/box" as *;
 
-  &__beat
-    animation-duration: 1.5s
-    animation-direction: normal
-    animation-iteration-count: infinite
-    animation-fill-mode: both
-    animation-name: fcBeatDelay
-    background-color: #035953
-    border-radius: 50%
-    height: rems(12px)
-    width: rems(12px)
-    display: inline-block
-    margin: $spacing-1
+.BaseBeatLoader {
+    @include flex($align: center, $justify: center);
 
-    &--one
-      animation-delay: 0s
+    &__beat {
+        animation-duration: 1.5s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+        animation-name: fcBeatDelay;
+        background-color: #035953;
+        border-radius: 50%;
+        height: rems(12px);
+        width: rems(12px);
+        display: inline-block;
+        margin: $spacing-1;
 
-    &--two
-      animation-delay: 0.2s
+        &--one {
+            animation-delay: 0s;
+        }
 
-    &--three
-      animation-delay: 0.4s
+        &--two {
+            animation-delay: 0.2s;
+        }
 
-@keyframes fcBeatDelay
-  0%
-    opacity: 0
-    transform: scale(0)
+        &--three {
+            animation-delay: 0.4s;
+        }
 
-  50%
-    opacity: 1
-    transform: scale(1)
+        @keyframes fcBeatDelay {
+        0% {
+            opacity: 0;
+            transform: scale(0);
+        }
 
-  100%
-    opacity: 0
-    transform: scale(0)
+        50% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(0);
+        }
+        }
+    }
+}
 </style>

@@ -1377,234 +1377,289 @@ const triggerSuccessToastr = (): void => {
 };
 </script>
 
-<style lang="sass">
-.Styleguide
-$block: &
-background- color: $app-bg
-padding: $spacing-16
+<style lang="scss">
+@use "./styles/base/colors" as *;
+@use "./styles/base/constants" as *;
+@use "./styles/base/functions" as *;
+@use "./styles/base/mixins" as *;
+@use "./styles/base/typography" as *;
+@use "./styles/base/spacing/box" as *;
 
-hr
-color: $secondary-900-bg
+.Styleguide {
+    $block: &;
+    background-color: $app-bg;
+    padding: $spacing-16;
 
-section
-padding: $spacing-12 $spacing-6
+    hr {
+        color: $secondary-900-bg;
+    }
 
-&__base-modal
-height: 50vh
-width: 50%
+    section {
+        padding: $spacing-12 $spacing-6;
+    }
 
-.BaseModal__modal
-width: rems(400px)
+    &__base-modal {
+        height: 50vh;
+        width: 50%;
 
-&__base-model-alert-triangle
-stroke: $error-500-bg
+        .BaseModal__modal {
+            width: rems(400px);
+        }
+    }
 
-&__base-modals
-+flex()
+    &__base-model-alert-triangle {
+        stroke: $error-500-bg;
+    }
 
-&__buttons-buttons
-+flex($align: center, $justify: space-between)
-background-color: $secondary-50-bg
-border: rems(1px) solid $secondary-200-bg
-padding: $spacing-10
+    &__base-modals {
+        @include flex();
+    }
 
-&__buttons-buttons-example
-+flex($align: center)
+    &__buttons-buttons {
+        @include flex($align: center, $justify: space-between);
+        background-color: $secondary-50-bg;
+        border: rems(1px) solid $secondary-200-bg;
+        padding: $spacing-10;
+    }
 
-&__buttons-buttons-example-label
-color: $secondary-600-bg
+    &__buttons-buttons-example {
+        @include flex($align: center);
+    }
 
-&__buttons-subheader
-display: block
-font-weight: $fw-semi-bold
-margin: $spacing-20 0
+    &__buttons-buttons-example-label {
+        color: $secondary-600-bg;
+    }
 
-&__color-category
-+flex($justify: space-between)
+    &__buttons-subheader {
+        display: block;
+        font-weight: $fw-semi-bold;
+        margin: $spacing-20 0;
+    }
 
-&__color-category-card-bottom
-+flex($direction: column)
-padding: $spacing-3
+    &__color-category {
+        @include flex($justify: space-between);
+    }
 
-&__color-category-card
-+flex($direction: column)
-border-radius: $border-radius
-box-shadow: $dialog-shadow
-width: rems(160px)
+    &__color-category-card-bottom {
+        @include flex($direction: column);
+        padding: $spacing-3;
+    }
 
-&__color-category-cards
-+flex()
+    &__color-category-card {
+        @include flex($direction: column);
+        border-radius: $border-radius;
+        box-shadow: $dialog-shadow;
+        min-width: rems(160px);
+    }
 
-&__color-category-card-hex
-+text-md
-color: $secondary-600-bg
+    &__color-category-cards {
+        @include flex();
+        overflow-x: auto;
+    }
 
-&__color-category-card-identifier
-+text-lg
-font-weight: $fw-medium
+    &__color-category-card-hex {
+        @include text-md;
+        color: $secondary-600-bg;
+    }
 
-&__color-category-card-text
-+text-lg
+    &__color-category-card-identifier {
+        @include text-lg;
+        font-weight: $fw-medium;
+    }
 
-&__color-category-card-top
-+flex($align: center, $justify: center)
-border-radius: $border-radius $border-radius 0 0
-padding: $spacing-6 $spacing-2
-width: 100%
+    &__color-category-card-text {
+        @include text-lg;
+    }
 
-&__color-category-header
-+text-lg
-font-weight: $fw-semi-bold
-width: rems(150px)
+    &__color-category-card-top {
+        @include flex($align: center, $justify: center);
+        border-radius: $border-radius $border-radius 0 0;
+        padding: $spacing-6 $spacing-2;
+    }
 
-&__input-category
-+flex($align: flex-end)
+    &__color-category-header {
+        @include text-lg;
+        font-weight: $fw-semi-bold;
+        width: rems(150px);
+    }
 
-&__section
-overflow-x: scroll
+    &__input-category {
+        @include flex($align: flex-end);
+    }
 
-&__section-header
-width: 100%
+    &__section-header {
+        width: 100%;
+    }
 
-&__section-subheader
-width: 100%
+    &__section-subheader {
+        width: 100%;
+    }
 
-&__section-subheader-p
-+display-lg
+    &__section-subheader-p {
+        @include display-lg;
+    }
 
-&__section-title
-+secondary-900
-padding: $spacing-6
+    &__section-title {
+        @include secondary-900;
+        padding: $spacing-6;
+    }
 
-&__spacing-header
-+flex
-border-bottom: rems(1px) solid $border
-margin-bottom: $spacing-4
-padding-bottom: $spacing-4
-width: 100%
+    &__spacing-header {
+        @include flex;
+        border-bottom: rems(1px) solid $border;
+        margin-bottom: $spacing-4;
+        padding-bottom: $spacing-4;
+        width: 100%;
+    }
 
-&__spacing-header-label
-+text-md
-color: $secondary-600-bg
-display: block
+    &__spacing-header-label {
+        @include text-md;
+        color: $secondary-600-bg;
+        display: block;
 
-&:nth-child(1)
-width: rems(100px)
+        &:nth-child(1) {
+            width: rems(100px);
+        }
+        
+        &:nth-child(2) {
+            width: rems(185px);
+        }
 
-&:nth-child(2)
-width: rems(185px)
-
-&:nth-child(3)
-width: rems(100px)
-
-&__spacing-table
-#{$block}__spacing-table-row:first-child
-#{$block}__spacing-table-column
-&:last-child
-border-radius: $border-radius
-border-top: 1px dashed rgba(123, 97, 255, 1)
-
-#{$block}__spacing-table-row:last-child
-#{$block}__spacing-table-column
-&:last-child
-border-radius: $border-radius
-border-bottom: 1px dashed rgba(123, 97, 255, 1)
+        &:nth-child(3) {
+            width: rems(100px);
+        }
+    }
 
 
-&__spacing-table-column
-color: $secondary-900-bg
-display: block
+    &__spacing-table {
+        #{$block}__spacing-table-row:first-child,
+        #{$block}__spacing-table-column,
+        &:last-child {
+            border-radius: $border-radius;
+            border-top: 1px dashed rgba(123, 97, 255, 1);
+        }
 
-&:nth-child(1)
-width: rems(100px)
+        #{$block}__spacing-table-row:last-child,
+        #{$block}__spacing-table-column,
+        &:last-child {
+            border-radius: $border-radius;
+            border-bottom: 1px dashed rgba(123, 97, 255, 1);
+        }
+    }
 
-&:nth-child(2)
-width: rems(185px)
+    &__spacing-table-column {
+        color: $secondary-900-bg;
+        display: block;
 
-&:nth-child(3)
-width: rems(100px)
+        &:nth-child(1) {
+            width: rems(100px);
+        }
 
-&:nth-child(4)
-border-left: 1px dashed rgba(123, 97, 255, 1)
-border-right: 1px dashed rgba(123, 97, 255, 1)
-padding: $spacing-4
-position: relative
-width: 300px
+        &:nth-child(2) {
+            width: rems(185px);
+        }
 
-&--extralong
-width: rems(1324px) !important
+        &:nth-child(3) {
+            width: rems(100px);
+        }
 
-label
-+text-xs
-color: $primary-700-bg
-padding: 0 $spacing-1
+        &:nth-child(4) {
+            border-left: 1px dashed rgba(123, 97, 255, 1);
+            border-right: 1px dashed rgba(123, 97, 255, 1);
+            padding: $spacing-4;
+            position: relative;
+            width: 300px;
+        }
+    }
 
-&__spacing-table-row
-+flex($align: center)
-height: rems(47px)
+    label {
+        @include text-xs;
+        color: $primary-700-bg;
+        padding: 0 $spacing-1;
+    }
 
-&__spacing-table-row-progress
-position: absolute
-left: rems(16px)
-top: rems(13.5px)
-z-index: -1
-/* Reset the default appearance */
--webkit-appearance: none
--moz-appearance: none
-appearance: none
-border: none
-border-radius: 0
-display: inline-block
-height: rems(20px)
-width: rems(256px)
+    &__spacing-table-row {
+        @include flex($align: center);
+        height: rems(47px);
+    }
 
-&::-webkit-progress-bar
-background-color: transparent
-height: 100%
-width: 100%
-border: none
-border-radius: 0
+    &__spacing-table-row-progress {
+        position: absolute;
+        left: rems(16px);
+        top: rems(13.5px);
+        z-index: -1;
+        /* Reset the default appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        border-radius: 0;
+        display: inline-block;
+        height: rems(20px);
+        width: rems(256px);
+    }
 
-&::-webkit-progress-value
-background-color: rgba(158, 119, 237, 0.1)
+    &::-webkit-progress-bar {
+        background-color: transparent;
+        height: 100%;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+    }
 
-&__subtitle
-+text-md
-margin: rems(92px) 0
+    &::-webkit-progress-value {
+        background-color: rgba(158, 119, 237, 0.1);
+    }
 
-&__toastrs-buttons
-+flex($justify: space-between)
+    &__subtitle {
+        @include text-md;
+        margin: rems(92px) 0;
+    }
 
-&__typography-example
-+flex($direction: column, $basis: 25%)
+    &__toastrs-buttons {
+        @include flex($justify: space-between);
+    }
 
-&__typography-example-label
-color: $secondary-900-bg
-display: block
+    &__typography-example {
+        @include flex($direction: column, $basis: 25%);
+    }
 
-&__typography-examples
-+flex()
+    &__typography-example-label {
+        color: $secondary-900-bg;
+        display: block;
+    }
 
-&__typography-header
-+flex($justify: space-between)
-border-bottom: rems(1px) solid $border
+    &__typography-examples {
+        @include flex();
+    }
 
-&__typography-header-label
-color: $secondary-600-bg
-font-size: $text-md-font-size
+    &__typography-header {
+        @include flex($justify: space-between);
+        border-bottom: rems(1px) solid $border;
+    }
 
-&__typography-device-example
-+flex($align: center, $justify: space-between)
-width: 100%
+    &__typography-header-label {
+        color: $secondary-600-bg;
+        font-size: $text-md-font-size;
+    }
 
-&__typography-device-examples
-+flex($direction: column, $justify: space-between)
-width: 50%
+    &__typography-device-example {
+        @include flex($align: center, $justify: space-between);
+        width: 100%;
+    }
 
-&__typography-device-examples-header
-color: $primary-600-bg
-font-weight: $fw-bold
+    &__typography-device-examples {
+        @include flex($direction: column, $justify: space-between);
+        width: 50%;
+    }
 
-&__typography-device-differences
-+flex()
+    &__typography-device-examples-header {
+        color: $primary-600-bg;
+        font-weight: $fw-bold;
+    }
+
+    &__typography-device-differences {
+        @include flex();
+    }
+}
 </style>

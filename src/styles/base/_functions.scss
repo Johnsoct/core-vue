@@ -1,0 +1,69 @@
+@use "sass:list";
+@use "sass:math";
+@use "sass:meta";
+
+$rem-baseline: 16px !default;
+
+@function media-min-width($min-width) {
+  @return 'only screen and (min-width: #{$min-width})';
+}
+
+@function media-max-width($max-width) {
+  @return 'only screen and (max-width: #{$max-width})';
+}
+
+@function media-between-widths($smaller-width, $larger-width) {
+  @return 'only screen and (min-width: #{$smaller-width + 1px}) and (max-width: #{$larger-width})';
+}
+
+@function ms($value, $ms-base: $base, $ms-ratio: $ratio) {
+  $size: pow($ms-ratio, $value)*$ms-base;
+
+  @return $size;
+}
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
+@function strip-unit($num) {
+    @return math.div($num, ($num * 0 + 1));
+}
+
+@function rems($values) {
+    $result: ();
+    $separator: list.separator($values);
+
+    @each $value in $values {
+        $value: $value;
+
+        @if meta.type-of($value) == "number" {
+            @if math.unit($value) == "px" {
+                $value: calc(strip-unit($value) / strip-unit($rem-baseline) * 1rem);
+            } @else if math.unit($value) != "rem" and $value != 0 {
+                @warn "Cannot convert number `#{$value}` to rem units";
+            }
+        } @else if meta.type-of($value) == "list" {
+            $value: rems($value);
+        } @else {
+            @warn "Cannot convert value `#{$value}` to rem units";
+        }
+
+        /* stylelint-disable-next-line scss/dollar-variable-first-in-block */
+        $result: list.append($result, $value, $separator);
+    }
+
+    @return if(list.length($result) == 1, list.nth($result, 1), $result);
+}
+
+@function strip-unit($num) {
+  @return math.div($num, ($num * 0 + 1));
+};

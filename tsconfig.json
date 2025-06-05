@@ -1,62 +1,62 @@
 {
-  "compilerOptions": {
-    /* Base Options: */
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noUnusedLocals": true,
-    "paths": {
-      "@cypress/*": [
-        "cypress/*"
-      ],
-      "@src/*": [
-        "src/*"
-      ],
-      "@ts/*": [
-        "types/*"
-      ],
+    "compilerOptions": {
+        /* Base Options: */
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "noUnusedLocals": true,
+        "paths": {
+            "@cypress/*": [
+                "cypress/*"
+            ],
+            "@src/*": [
+                "src/*"
+            ],
+            "@ts/*": [
+                "types/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "target": "es2022",
+        "types": [
+            "cypress",
+            "jquery",
+            "node",
+            "vite/client",
+            "./cypress.d.ts"
+        ],
+        "verbatimModuleSyntax": true,
+        /* Strictness */
+        "noUncheckedIndexedAccess": true,
+        "strict": true,
+        /* If transpiling with TypeScript: */
+        "moduleResolution": "Bundler",
+        "module": "es2022",
+        "outDir": "dist",
+        "sourceMap": true,
+        /* AND if you're building for a library: */
+        "declaration": true,
+        /* AND if you're building for a library in a monorepo: */
+        "composite": false, // Throws reference errors in VSCode if true
+        "declarationMap": true,
+        /* If your code runs in the DOM: */
+        "lib": [
+            "es2022",
+            "dom",
+            "dom.iterable"
+        ]
     },
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "types": [
-      "cypress",
-      "jquery",
-      "node",
-      "vite/client",
-      "./cypress.d.ts",
+    "exclude": [
+        "node_modules",
+        "cypress",
+        "cypress.config.ts"
     ],
-    "verbatimModuleSyntax": true,
-    /* Strictness */
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
-    /* If transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
-    "module": "es2022",
-    "outDir": "dist",
-    "sourceMap": true,
-    /* AND if you're building for a library: */
-    "declaration": true,
-    /* AND if you're building for a library in a monorepo: */
-    "composite": false, // Throws reference errors in VSCode if true
-    "declarationMap": true,
-    /* If your code runs in the DOM: */
-    "lib": [
-      "es2022",
-      "dom",
-      "dom.iterable"
-    ],
-  },
-  "exclude": [
-    "node_modules",
-    "cypress",
-    "cypress.config.ts",
-  ],
-  "include": [
-    "src",
-    "cypress.d.ts",
-  ],
+    "include": [
+        "src",
+        "cypress.d.ts"
+    ]
 }

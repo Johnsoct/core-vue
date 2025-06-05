@@ -52,7 +52,7 @@
 
 <!-- Only render the component when the options as props is a valid array of options -->
 <script setup lang="ts">
-  // Packages
+// Packages
 import vSelect from 'vue-select';
 import {
     defineEmits,
@@ -113,103 +113,126 @@ const props = defineProps({
 
 const selectedOption = ref(props.value);
 
- 
 watch(() => selectedOption.value, () => {
     emit("update:modelValue", selectedOption.value);
 });
 </script>
 
-<style lang="sass">
-.BaseSelect
-  $block: &
-  +flex($direction: column)
+<style lang="scss">
+@use "../../styles/base/colors" as *;
+@use "../../styles/base/constants" as *;
+@use "../../styles/base/functions" as *;
+@use "../../styles/base/mixins" as *;
+@use "../../styles/base/typography" as *;
+@use "../../styles/base/spacing/box" as *;
 
-  .vs__actions
-    padding: 0
+.BaseSelect {
+    $block: &;
+    @include flex($direction: column);
 
-  .vs__clear
-    +flex($justify: center, $align: center)
+    .vs__actions {
+        padding: 0;
+    }
 
-  .vs__clear svg,
-  &__open-indicator-icon
-    height: rems(20px)
-    stroke: $secondary-500-bg
-    width: rems(20px)
+    .vs__clear {
+        @include flex($justify: center, $align: center);
+    }
 
-  .vs__dropdown-menu
-    border: rems(1px) solid $secondary-200-bg
-    border-radius: $border-radius
-    box-shadow: rems(0px) rems(4px) rems(6px) rems(-2px) rgba(16, 24, 40, 0.03), rems(0px) rems(12px) rems(16px) rems(-4px) rgba(16, 24, 40, 0.08)
-    // Horizontally center by half parent's border width
-    left: rems(-1px)
-    padding: $spacing-2 $spacing-3
-    top: calc(100% + $spacing-1)
-    // Add width to account for border of parent
-    width: calc(100% + 2px)
+    .vs__clear svg,
+    &__open-indicator-icon {
+        height: rems(20px);
+        stroke: $secondary-500-bg;
+        width: rems(20px);
+    }
 
-  .vs__dropdown-option,
-  .vs__no-options
-    +text-md
-    color: $secondary-900-bg
-    font-weight: $fw-bold
-    padding: $spacing-3
+    .vs__dropdown-menu {
+        border: rems(1px) solid $secondary-200-bg;
+        border-radius: $border-radius;
+        box-shadow: rems(0px) rems(4px) rems(6px) rems(-2px) rgba(16, 24, 40, 0.03), rems(0px) rems(12px) rems(16px) rems(-4px) rgba(16, 24, 40, 0.08);
+        // Horizontally center by half parent's border width
+        left: rems(-1px);
+        padding: $spacing-2 $spacing-3;
+        top: calc(100% + $spacing-1);
+        // Add width to account for border of parent
+        width: calc(100% + 2px);
+    }
 
-  .vs__dropdown-option
-    border-radius: $border-radius
-    &:active,
-    &:hover,
-    &:focus,
-    &:visited
-      background-color: $secondary-100-bg
+    .vs__dropdown-option,
+    .vs__no-options {
+        @include text-md;
+        color: $secondary-900-bg;
+        font-weight: $fw-bold;
+        padding: $spacing-3;
+    }
 
-  .vs__dropdown-option--highlight
-    background: none
-    color: none
+    .vs__dropdown-option {
+        border-radius: $border-radius;
+        &:active,
+        &:hover,
+        &:focus,
+        &:visited {
+            background-color: $secondary-100-bg;
+        }
+    }
 
-  .vs__dropdown-toggle
-    +flex($align: center, $justify: space-between)
-    border: 0
-    padding: 0
+    .vs__dropdown-option--highlight {
+        background: none;
+        color: none;
+    }
 
-  .vs__search,
-  .vs__selected
-    +text-md
-    border: 0
-    color: $secondary-900-bg
-    font-weight: $fw-medium
-    line-height: 0
-    margin: 0
-    padding: 0
+    .vs__dropdown-toggle {
+        @include flex($align: center, $justify: space-between);
+        border: 0;
+        padding: 0;
+    }
 
-  .vs__selected-options
-    padding-left: 0
+    .vs__search,
+    .vs__selected {
+        @include text-md;
+        border: 0;
+        color: $secondary-900-bg;
+        font-weight: $fw-medium;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+    }
 
-  .v-select
-    background-color: $base-white
-    border: rems(1px) solid $border
-    border-radius: $border-radius
-    box-shadow: $box-shadow-inputs
-    padding: $spacing-2 $spacing-3
-    width: rems(250px)
+    .vs__selected-options {
+        padding-left: 0;
+    }
 
-  .vs--single.vs--open
-    .vs__selected
-      position: unset
-      opacity: 1
+    .v-select {
+        background-color: $base-white;
+        border: rems(1px) solid $border;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow-inputs;
+        padding: $spacing-2 $spacing-3;
+        width: rems(250px);
+    }
 
-  &__label
-    +text-sm
-    color: $secondary-700-bg
-    font-weight: $fw-medium
-    margin-bottom: $spacing-2
-    user-select: none
+    .vs--single.vs--open {
+        .vs__selected {
+            position: unset;
+            opacity: 1;
+        }
+    }
 
-  &__select
+    &__label {
+        @include text-sm;
+        color: $secondary-700-bg;
+        font-weight: $fw-medium;
+        margin-bottom: $spacing-2;
+        user-select: none;
+    }
 
-    &--disabled
-      pointer-events: none
+    &__select {
+        &--disabled {
+            pointer-events: none;
 
-      .vs__search
-        color: $secondary-25-color
-
+            .vs__search {
+                color: $secondary-25-color;
+            }
+        }
+    }
+}
 </style>

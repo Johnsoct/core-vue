@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-  // Packages
+// Packages
 import { ref } from 'vue';
 
 const emit = defineEmits([ "update:modelValue" ]);
@@ -88,59 +88,69 @@ const onChange = () => {
 };
 </script>
 
-<style lang="sass">
-.BaseRadioInput
-  $block: &
-  +flex($align: center)
-  cursor: pointer
-  height: rems(38px) // Match other input heights / make hit area larger
+<style lang="scss">
+@use "../../styles/base/colors" as *;
+@use "../../styles/base/functions" as *;
+@use "../../styles/base/mixins" as *;
+@use "../../styles/base/typography" as *;
+@use "../../styles/base/spacing/box" as *;
 
-  &--disabled
-    cursor: none
-    pointer-events: none
+.BaseRadioInput {
+    $block: &;
+    @include flex($align: center);
+    cursor: pointer;
+    height: rems(38px) // Match other input heights / make hit area larger;
 
-  &__input
-    appearance: none
-    border: rems(1px) solid $border
-    border-radius: 50%
-    cursor: inherit
-    height: rems(20px)
-    transition: 0.2s all linear
-    width: rems(20px)
+    &--disabled
+    {
+        cursor: none;
+        pointer-events: none;
+    }
+    &__input {
+        appearance: none;
+        border: rems(1px) solid $border;
+        border-radius: 50%;
+        cursor: inherit;
+        height: rems(20px);
+        transition: 0.2s all linear;
+        width: rems(20px);
 
-    &:hover,
-    &:focus
-      background-color: $primary-600-bg
-      border-color: $base-white
-      border-width: rems(6px)
-      box-shadow: rems(0px) rems(0px) rems(0px) rems(1px) $primary-600-bg
-
-    &[disabled],
-    &[aria-disabled="true"]
-      background-color: $secondary-300-bg
-      border-color: $secondary-100-bg
-      box-shadow: rems(0px) rems(0px) rems(0px) rems(1px) $secondary-300-bg
-
-    &--checked
-      background-color: $primary-600-bg
-      border-color: $base-white
-      border-width: rems(6px)
-      box-shadow: rems(0px) rems(0px) rems(0px) rems(1px) $primary-600-bg
-
-  &__label
-    +text-md
-    color: $secondary-900-bg
-    cursor: inherit
-    font-weight: $fw-medium
-    user-select: none
-
-  &__labels
-    +flex($direction: column)
-    margin-left: $spacing-3
-
-  &__supporting-label
-    +text-sm
-    color: $secondary-600-bg
-    cursor: inherit
-    font-weight: $fw-medium
+        &:hover,
+        &:focus {
+            background-color: $primary-600-bg;
+            border-color: $base-white;
+            border-width: rems(6px);
+            box-shadow: rems(0px) rems(0px) rems(0px) rems(1px) $primary-600-bg;
+        }
+        &[disabled],
+        &[aria-disabled="true"] {
+            background-color: $secondary-300-bg;
+            border-color: $secondary-100-bg;
+            box-shadow: rems(0px) rems(0px) rems(0px) rems(1px) $secondary-300-bg;
+        }
+        &--checked {
+            background-color: $primary-600-bg;
+            border-color: $base-white;
+            border-width: rems(6px);
+            box-shadow: rems(0px) rems(0px) rems(0px) rems(1px) $primary-600-bg;
+        }
+    }
+    &__label {
+        @include text-md;
+        color: $secondary-900-bg;
+        cursor: inherit;
+        font-weight: $fw-medium;
+        user-select: none;
+    }
+    &__labels {
+        @include flex($direction: column);
+        margin-left: $spacing-3;
+    }
+    &__supporting-label {
+        @include text-sm;
+        color: $secondary-600-bg;
+        cursor: inherit;
+        font-weight: $fw-medium;
+    }
+}
 </style>

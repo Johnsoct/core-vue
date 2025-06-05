@@ -1,0 +1,93 @@
+@use 'functions' as *;
+
+$border-radius: 8px;
+$box-shadow-inputs: rems(0px) rems(1px) rems(2px) rems(0px) rgb(16 24 40 / 5%);
+$dialog-shadow: rems(0px) rems(4px) rems(6px) rems(-2px) rgb(16 24 40 / 3%), rems(0px) rems(12px) rems(16px) rems(-4px) rgb(16 24 40 / 8%);
+$input-height: rems(40px);
+
+// BREAKPOINTS
+// The ordering @media statements is EXTREMELY IMPORTANT!
+// For desired results:
+//   1. `max-width` ($breakpoint-and-down) descending
+//   2. `min-width` ($breakpoint-and-up) ascending
+// For more explanation: https://stackoverflow.com/a/8792163
+
+ // iPhone SE
+$mobile-small: 375px;
+
+ // iPhone 12 Pro
+$mobile-medium: 390px;
+
+ // iPhone XR
+$mobile-large: 414px;
+
+// iPhone 14 Pro Max
+$mobile-xlarge: 430px;
+
+// iPhone SE
+$mobile-small-landscape: 667px;
+
+// iPhone 12 Pro
+$mobile-medium-landscape: 844px;
+
+// iPhone XR
+$mobile-large-landscape: 896px;
+
+// iPhone 14 Pro Max
+$mobile-xlarge-landscape: 932px;
+
+// iPad and iPad Mini
+$tablet-small: 768px;
+
+// iPad Pro
+$tablet-large: 1024px;
+
+// ipad landscape
+$tablet-landscape: 1024px;
+$small: 600px;
+$medium-narrow: 900px;
+$medium-wide: 992px;
+$large: 1200px;
+$xlarge: 1440px;
+$mobile-small-and-down: media-max-width($mobile-small);
+$mobile-medium-and-down: media-max-width($mobile-medium);
+$mobile-large-and-down: media-max-width($mobile-large);
+$mobile-xlarge-and-down: media-max-width($mobile-xlarge);
+$mobile-small-landscape-and-down: media-max-width($mobile-small-landscape);
+$mobile-medium-landscape-and-down: media-max-width($mobile-medium-landscape);
+$mobile-large-landscape-and-down: media-max-width($mobile-large-landscape);
+$mobile-xlarge-landscape-and-down: media-max-width($mobile-xlarge-landscape);
+$tablet-small-and-down: media-max-width($tablet-small);
+$tablet-large-and-down: media-max-width($tablet-large);
+$tablet-landscape-and-down: media-max-width($tablet-landscape);
+$small-and-down: media-max-width($small);
+$medium-narrow-and-down: media-max-width($medium-narrow);
+$medium-wide-and-down: media-max-width($medium-wide);
+$tablet-landscape-and-down: media-max-width($tablet-landscape);
+$tablet-small-and-down: media-max-width($tablet-small);
+$large-and-down: media-max-width($large);
+$xlarge-and-down: media-max-width($xlarge);
+$mobile-small-and-up: media-min-width($mobile-small);
+$mobile-medium-and-up: media-min-width($mobile-medium);
+$mobile-large-and-up: media-min-width($mobile-large);
+$mobile-large-landscape-and-up: media-min-width($mobile-large-landscape);
+$small-and-up: media-min-width($small);
+$medium-narrow-and-up: media-min-width($medium-narrow);
+$medium-wide-and-up: media-min-width($medium-wide);
+$tablet-landscape-and-up: media-min-width($tablet-landscape);
+$tablet-small-and-up: media-min-width($tablet-small);
+$large-and-up: media-min-width($large);
+$xlarge-and-up: media-min-width($xlarge);
+$large-to-xlarge: media-between-widths($large, $xlarge);
+$mobile-small-to-mobile-large: media-between-widths($mobile-small, $mobile-large);
+$mobile-small-to-small: media-between-widths($mobile-small, $small);
+$mobile-small-to-medium-narrow: media-between-widths($mobile-small, $medium-narrow);
+$mobile-medium-to-mobile-large: media-between-widths($mobile-medium, $mobile-large);
+$mobile-large-to-small: media-between-widths($mobile-large, $small);
+$mobile-large-to-tablet-small: media-between-widths($mobile-large, $tablet-small);
+$mobile-large-landscape-to-xlarge: media-between-widths($mobile-large-landscape, $xlarge);
+$medium-narrow-to-medium-wide: media-between-widths($medium-narrow, $medium-wide);
+$medium-wide-to-large: media-between-widths($medium-wide, $large);
+$small-to-mobile-large-landscape: media-between-widths($small, $mobile-large-landscape);
+$small-to-medium-narrow: media-between-widths($small, $medium-narrow);
+$tablet-landscape-to-xlarge: media-between-widths($tablet-landscape, $xlarge);

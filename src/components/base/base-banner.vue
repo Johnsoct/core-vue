@@ -133,112 +133,136 @@ const buttonCallback = (): void => {
 };
 </script>
 
-<style lang="sass">
-.BaseBanner
-  $block: &
-  +flex($align: center, $justify: space-between)
-  border-radius: $border-radius
-  box-shadow: rems(0px) rems(4px) rems(6px) rems(-2px) rgba(16, 24, 40, 0.03), rems(0px) rems(12px) rems(16px) rems(-4px) rgba(16, 24, 40, 0.08)
-  padding: $spacing-3
-  width: 100%
+<style lang="scss">
+@use "../../styles/base/colors" as *;
+@use "../../styles/base/constants" as *;
+@use "../../styles/base/functions" as *;
+@use "../../styles/base/mixins" as *;
+@use "../../styles/base/typography" as *;
+@use "../../styles/base/spacing/box" as *;
 
-  &__close-btn
-    +flex($justify: center, $align: center)
-    background-color: transparent
-    border: none
-    cursor: pointer
-    padding: rems(10px)
+.BaseBanner {
+    $block: &;
+    @include flex($align: center, $justify: space-between);
+    border-radius: $border-radius;
+    box-shadow: rems(0px) rems(4px) rems(6px) rems(-2px) rgba(16, 24, 40, 0.03), rems(0px) rems(12px) rems(16px) rems(-4px) rgba(16, 24, 40, 0.08);
+    padding: $spacing-3;
+    width: 100%;
 
-  &__close-icon
-    height: rems(20px)
-    width: rems(20px)
+    &__close-btn {
+        @include flex($justify: center, $align: center);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: rems(10px);
+    }
 
-  &__icon
-    fill: none
+    &__close-icon {
+        height: rems(20px);
+        width: rems(20px);
+    }
 
-  &__icon-container
-    +flex($justify: center, $align: center)
-    background-color: $base-white
-    border: rems(1px) solid $secondary-200-bg
-    border-radius: $border-radius
-    height: rems(40px)
-    margin-right: $spacing-4
-    width: rems(40px)
+    &__icon {
+        fill: none;
+    }
 
-  &__left
-    +flex($align: center)
+    &__icon-container {
+        @include flex($justify: center, $align: center);
+        background-color: $base-white;
+        border: rems(1px) solid $secondary-200-bg;
+        border-radius: $border-radius;
+        height: rems(40px);
+        margin-right: $spacing-4;
+        width: rems(40px);
+    }
 
-  &__right
-    +flex($align: center)
+    &__left {
+        @include flex($align: center);
+    }
 
-  &__text-content
-    +flex($direction: column)
+    &__right {
+        @include flex($align: center);
+    }
 
-  &__text-content-header
-    +text-md
-    font-weight: $fw-semi-bold
+    &__text-content {
+        @include flex($direction: column);
+    }
 
-  &__text-content-subheader
-    +text-md
-    margin-top: $spacing-1
+    &__text-content-header {
+        @include text-md;
+        font-weight: $fw-semi-bold;
+    }
 
-  &--error
-    background-color: $error-100-bg
-    border: rems(1px) solid $error-200-bg
+    &__text-content-subheader {
+        @include text-md;
+        margin-top: $spacing-1;
+    }
 
-    #{$block}__close-icon
-      stroke: $error-900-bg
+    &--error {
+        background-color: $error-100-bg;
+        border: rems(1px) solid $error-200-bg;
 
-    #{$block}__icon
-      stroke: $error-500-bg
+        #{$block}__close-icon {
+            stroke: $error-900-bg;
+        }
+        #{$block}__icon {
+            stroke: $error-500-bg;
+        }
+        #{$block}__text-content-header,
+        #{$block}__text-content-subheader {
+            color: $error-900-bg;
+        }
+    }
 
-    #{$block}__text-content-header,
-    #{$block}__text-content-subheader
-      color: $error-900-bg
+    &--info {
+        background-color: $base-white;
+        border: rems(1px) solid $secondary-300-bg;
 
-  &--info
-    background-color: $base-white
-    border: rems(1px) solid $secondary-300-bg
+        #{$block}__close-icon {
+            stroke: $secondary-700-bg;
+        }
+        #{$block}__icon {
+            stroke: $secondary-25-color;
+        }
+        #{$block}__text-content-header,
+        #{$block}__text-content-subheader {
+            color: $secondary-700-bg;
+        }
+    }
 
-    #{$block}__close-icon
-      stroke: $secondary-700-bg
+    &--persistent {
+        background-color: $primary-25-bg;
+        border: rems(1px) solid $primary-300-bg;
 
-    #{$block}__icon
-      stroke: $secondary-25-color
+        #{$block}__close-icon {
+            stroke: $primary-500-bg;
+        }
+        #{$block}__icon {
+            stroke: $primary-700-bg;
+        }
+        #{$block}__icon-container {
+            background-color: $primary-300-bg;
+            border-radius: 50%;
+        }
+        #{$block}__text-content-header,
+        #{$block}__text-content-subheader {
+            color: $primary-700-bg;
+        }
+    }
+    &--success {
+        background-color: $primary-25-bg;
+        border: rems(1px) solid $primary-300-bg;
 
-    #{$block}__text-content-header,
-    #{$block}__text-content-subheader
-      color: $secondary-700-bg
-
-  &--persistent
-    background-color: $primary-25-bg
-    border: rems(1px) solid $primary-300-bg
-
-    #{$block}__close-icon
-      stroke: $primary-500-bg
-
-    #{$block}__icon
-      stroke: $primary-700-bg
-
-    #{$block}__icon-container
-      background-color: $primary-300-bg
-      border-radius: 50%
-
-    #{$block}__text-content-header,
-    #{$block}__text-content-subheader
-      color: $primary-700-bg
-
-  &--success
-    background-color: $primary-25-bg
-    border: rems(1px) solid $primary-300-bg
-
-    #{$block}__close-icon
-      stroke: $primary-500-bg
-
-    #{$block}__icon
-      stroke: $primary-700-bg
-
-    #{$block}__text-content-header,
-    #{$block}__text-content-subheader
-      color: $primary-700-bg
+        #{$block}__close-icon {
+            stroke: $primary-500-bg;
+        }
+        #{$block}__icon {
+            stroke: $primary-700-bg;
+        }
+        #{$block}__text-content-header,
+        #{$block}__text-content-subheader {
+            color: $primary-700-bg;
+        }
+    }
+}
 </style>
