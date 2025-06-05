@@ -1,5 +1,771 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<template>
+    <main class="Styleguide">
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Typography</h6>
+            </div>
+            <section>
+                <h3 class="mb-4">Inter</h3>
+                <h1>Ag</h1>
+
+                <div class="Styleguide__section-subheader mt-16 mb-16">
+                    <p class="Styleguide__section-subheader-p">
+                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                    </p>
+                    <p class="Styleguide__section-subheader-p">
+                        abcdefghijklmnopqrstuvwxyz
+                    </p>
+                    <p class="Styleguide__section-subheader-p">
+                        0123456789 !@#$%^&*()
+                    </p>
+                </div>
+
+                <div
+                    v-for="(type, index) in typeOptions"
+                    class="mb-16"
+                    :key="`type-${index}`"
+                >
+                    <div class="Styleguide__typography-header mb-8 pb-4">
+                        <label class="Styleguide__typography-header-label">{{ type.labels.title }}</label>
+                        <label class="Styleguide__typography-header-label">
+                            {{ generateTypographyHeader(type) }}
+                        </label>
+                    </div>
+
+                    <div class="Styleguide__typography-examples">
+                        <div class="Styleguide__typography-example">
+                            <label
+                                class="Styleguide__typography-example-label mb-16"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                {{ type.labels.title }}
+                            </label>
+                            <label
+                                class="Styleguide__typography-example-label"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                Regular
+                            </label>
+                        </div>
+
+                        <div class="Styleguide__typography-example">
+                            <label
+                                class="Styleguide__typography-example-label fw-med mb-16"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                {{ type.labels.title }}
+                            </label>
+                            <label
+                                class="Styleguide__typography-example-label fw-med"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                Medium
+                            </label>
+                        </div>
+
+                        <div class="Styleguide__typography-example">
+                            <label
+                                class="Styleguide__typography-example-label fw-semi-bold mb-16"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                {{ type.labels.title }}
+                            </label>
+                            <label
+                                class="Styleguide__typography-example-label fw-semi-bold"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                Semibold
+                            </label>
+                        </div>
+
+                        <div class="Styleguide__typography-example">
+                            <label
+                                class="Styleguide__typography-example-label fw-semi-bold mb-16"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                {{ type.labels.title }}
+                            </label>
+                            <label
+                                class="Styleguide__typography-example-label fw-semi-bold"
+                                :style="generateTypographyStyles(type)"
+                            >
+                                Bold
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Styleguide__typography-device-differences mt-32">
+                    <div class="Styleguide__typography-device-examples pr-12">
+                        <label class="Styleguide__typography-device-examples-header mb-12">Mobile</label>
+                        <div
+                            v-for="(type, index) in mobileTypes"
+                            class="Styleguide__typography-device-example mb-12"
+                            :key="`type-${index}`"
+                        >
+                            <label
+                                class="cap"
+                                :style="generateTypographyStyles(type.category)"
+                            >
+                                {{ type.tag }}
+                            </label>
+
+                            <label class="Styleguide__typography-header-label">
+                                {{ generateTypographyHeader(type.category) }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="Styleguide__typography-device-examples">
+                        <label class="Styleguide__typography-device-examples-header mb-12">Desktop</label>
+                        <div
+                            v-for="(type, index) in desktopTypes"
+                            class="Styleguide__typography-device-example mb-12"
+                            :key="`type-${index}`"
+                        >
+                            <label
+                                class="cap"
+                                :style="generateTypographyStyles(type.category)"
+                            >
+                                {{ type.tag }}
+                            </label>
+
+                            <label class="Styleguide__typography-header-label">
+                                {{ generateTypographyHeader(type.category) }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Colors</h6>
+            </div>
+
+            <section>
+                <div
+                    v-for="(bgColorCategory, colorsBGsIndex) in colorsBGs"
+                    class="Styleguide__color-category mb-16"
+                    :key="`colors-${colorsBGsIndex}`"
+                >
+                    <label class="Styleguide__color-category-header mr-8">{{
+                        colorsTypes[colorsBGsIndex] }}</label>
+
+                    <div class="Styleguide__color-category-cards">
+                        <div
+                            v-for="(bgColor, bgColorCategoryIndex) in bgColorCategory"
+                            class="Styleguide__color-category-card mr-8"
+                            :key="`base-colors-${bgColorCategoryIndex}`"
+                        >
+                            <div
+                                class="Styleguide__color-category-card-top"
+                                :style="{ backgroundColor: bgColor }"
+                            >
+                                <label
+                                    class="Styleguide__color-category-card-text"
+                                    :style="{ color: colorsTexts?.[colorsBGsIndex]?.[bgColorCategoryIndex] }"
+                                >
+                                    Text
+                                </label>
+                            </div>
+                            <div class="Styleguide__color-category-card-bottom">
+                                <label class="Styleguide__color-category-card-identifier">
+                                    {{ colorIdentifiers[bgColorCategoryIndex] }}
+                                </label>
+                                <label class="Styleguide__color-category-card-hex">
+                                    {{ bgColor }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Spacing system guides</h6>
+            </div>
+
+            <section>
+                <div class="Styleguide__spacing-header">
+                    <label class="Styleguide__spacing-header-label">Name</label>
+                    <label class="Styleguide__spacing-header-label">REMs (16px base)</label>
+                    <label class="Styleguide__spacing-header-label">Pixels</label>
+                </div>
+
+                <div class="Styleguide__spacing-table">
+                    <div
+                        v-for="spacing in spacings"
+                        class="Styleguide__spacing-table-row"
+                        :key="`spacing-${spacing}`"
+                    >
+                        <label class="Styleguide__spacing-table-column">{{ spacing.name
+                        }}</label>
+                        <label class="Styleguide__spacing-table-column">{{ spacing.rem
+                        }}rem</label>
+                        <label class="Styleguide__spacing-table-column">{{ spacing.px
+                        }}px</label>
+                        <div class="Styleguide__spacing-table-column">
+                            <label>{{ spacing.px }}px</label>
+                            <progress
+                                class="Styleguide__spacing-table-row-progress"
+                                :max="spacings?.[spacings.length - 1]?.px"
+                                :value="spacing.px"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Buttons</h6>
+            </div>
+
+            <section>
+                <template
+                    v-for="(style) in buttonStyles"
+                    :key="`buttons-${style}`"
+                >
+                    <label class="Styleguide__buttons-subheader subtitle-1 capitalize">{{ style
+                    }}</label>
+
+                    <div class="Styleguide__buttons-example">
+                        <template
+                            v-for="size in buttonSizes"
+                            :key="`buttons-${size}`"
+                        >
+                            <label class="subtitle-2">{{ size }}</label>
+
+                            <div class="Styleguide__buttons-buttons mt-6 mb-6">
+                                <div class="Styleguide__buttons-buttons-example">
+                                    <label
+                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
+                                    >Rest</label>
+                                    <base-button
+                                        :size="size"
+                                        :type="style"
+                                    >
+                                        Button CTA
+                                    </base-button>
+                                </div>
+                                <div class="Styleguide__buttons-buttons-example">
+                                    <label
+                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
+                                    >Hover</label>
+                                    <base-button
+                                        :size="size"
+                                        :type="style"
+                                    >
+                                        Button CTA
+                                    </base-button>
+                                </div>
+                                <div class="Styleguide__buttons-buttons-example">
+                                    <label
+                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
+                                    >Focused</label>
+                                    <base-button
+                                        :size="size"
+                                        :type="style"
+                                    >
+                                        Button CTA
+                                    </base-button>
+                                </div>
+                                <div class="Styleguide__buttons-buttons-example">
+                                    <label
+                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
+                                    >Disabled</label>
+                                    <base-button
+                                        :disabled="true"
+                                        :size="size"
+                                        :type="style"
+                                    >
+                                        Button CTA
+                                    </base-button>
+                                </div>
+                                <div class="Styleguide__buttons-buttons-example">
+                                    <label
+                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
+                                    >Loading</label>
+                                    <base-button
+                                        :loading="true"
+                                        :size="size"
+                                        :type="style"
+                                    >
+                                        Button CTA
+                                    </base-button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Inputs</h6>
+            </div>
+
+            <section>
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        :label="true"
+                        :label-for="'input-rest'"
+                        :placeholder="'Enter the number and street'"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Rest</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        :label="true"
+                        :label-for="'input-focused'"
+                        :placeholder="'Enter the number and street'"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Focused</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        v-model="filledInput"
+                        :label="true"
+                        :label-for="'input-filled'"
+                        :placeholder="'Enter the number and street'"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Filled</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        v-model="filledInput"
+                        :disabled="true"
+                        :label="true"
+                        :label-for="'input-disabled'"
+                        :placeholder="'Enter the number and street'"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Disabled</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        v-model="filledInput"
+                        :instructions="'This is an error message.'"
+                        :label="true"
+                        :label-for="'input-error'"
+                        :placeholder="'Enter the number and street'"
+                        :valid="false"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Error</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        v-model="filledInput"
+                        :hint="'This is a hint to help the user.'"
+                        :instructions="'This is an error message.'"
+                        :label="true"
+                        :label-for="'input-hint'"
+                        :placeholder="'Enter the number and street'"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Hint</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        v-model="filledInput"
+                        :label="true"
+                        :label-for="'input-password'"
+                        :placeholder="'Enter the number and street'"
+                        :type="'password'"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Password</label>
+                </div>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-input
+                        :instructions="'You\'ve been a baaaaaad boy'"
+                        :label="true"
+                        :label-for="'input-required'"
+                        :placeholder="'Enter the number and street'"
+                        :required="true"
+                    >
+                        Business address
+                    </base-input>
+                    <label class="Styleguide__input-category-label ml-24">Required</label>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Modals</h6>
+            </div>
+
+            <section>
+                <div class="Styleguide__base-modals">
+                    <base-modal
+                        @close="() => console.log('Close')"
+                        class="Styleguide__base-modal"
+                        :header="'Possible Duplicate!'"
+                        :is-closable="true"
+                        :subheader="'This invoice may have been submitted before. Are you sure you want to submit it again?'"
+                    >
+                        <template #icon>
+                            <alert-triangle-icon class="Styleguide__base-model-alert-triangle" />
+                        </template>
+                        <template #content>
+                            <base-button
+                                class="width-100 mr-3"
+                                :size="'lg'"
+                                :type="'tertiary'"
+                            >
+                                No, cancel
+                            </base-button>
+                            <base-button
+                                class="width-100"
+                                :size="'lg'"
+                            >
+                                Yes, submit
+                            </base-button>
+                        </template>
+                    </base-modal>
+                    <base-modal
+                        @close="() => console.log('Close')"
+                        class="Styleguide__base-modal"
+                        :header="'No internet connection'"
+                        :is-closable="true"
+                        :subheader="'Please try again when you have a strong and stable internet connection'"
+                    >
+                        <template #content>
+                            <base-button
+                                class="width-100"
+                                :size="'lg'"
+                            >
+                                Okay
+                            </base-button>
+                        </template>
+                    </base-modal>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Radio</h6>
+            </div>
+
+            <section>
+                <h6 class="Styleguide__subtitle mt-0">
+                    Without supporting text
+                </h6>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :label="true"
+                        :label-for="'radio-selected'"
+                        :value="true"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Selected</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :label="true"
+                        :label-for="'radio-unselected'"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Unselected</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :label="true"
+                        :label-for="'radio-hover'"
+                        :value="true"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :disabled="true"
+                        :label="true"
+                        :label-for="'radio-hover'"
+                        :value="true"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
+                </div>
+
+                <h6 class="Styleguide__subtitle">
+                    With supporting text
+                </h6>
+
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :label="true"
+                        :label-for="'radio-selected'"
+                        :supporting-label="true"
+                        :supporting-label-for="'radio-selected'"
+                        :value="true"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                        <template #supporting>
+                            Should arrive within 3 hours
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Selected</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :label="true"
+                        :label-for="'radio-unselected'"
+                        :supporting-label="true"
+                        :supporting-label-for="'radio-unselected'"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                        <template #supporting>
+                            Should arrive within 3 hours
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Unselected</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :label="true"
+                        :label-for="'radio-hover'"
+                        :supporting-label="true"
+                        :supporting-label-for="'radio-hover'"
+                        :value="true"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                        <template #supporting>
+                            Should arrive within 3 hours
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-radio-input
+                        :disabled="true"
+                        :label="true"
+                        :label-for="'radio-hover'"
+                        :supporting-label="true"
+                        :supporting-label-for="'radio-hover'"
+                        :value="true"
+                    >
+                        <template #default>
+                            Expedited ($18)
+                        </template>
+                        <template #supporting>
+                            Should arrive within 3 hours
+                        </template>
+                    </base-radio-input>
+                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Select</h6>
+            </div>
+
+            <section>
+                <div class="Styleguide__input-category mb-6">
+                    <base-select
+                        :options="['Option A', 'Option B']"
+                        :placeholder="'Filter by'"
+                    />
+                    <label class="Styleguide__input-category-label ml-24">Rest (no label)</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-select
+                        :label="true"
+                        :label-for="'base-select-rest'"
+                        :options="['Option A', 'Option B']"
+                        :placeholder="'Filter by'"
+                    >
+                        Label
+                    </base-select>
+                    <label class="Styleguide__input-category-label ml-24">Rest</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-select
+                        :disabled="true"
+                        :label="true"
+                        :label-for="'base-select-disabled'"
+                        :options="['Option A', 'Option B']"
+                        :placeholder="'Filter by'"
+                    >
+                        Label
+                    </base-select>
+                    <label class="Styleguide__input-category-label ml-24">Disabled</label>
+                </div>
+                <div class="Styleguide__input-category mb-6">
+                    <base-select
+                        :label="true"
+                        :label-for="'base-select-disabled'"
+                        :options="[
+                            {
+                                firstName: 'Dick',
+                                lastName: 'Head',
+                            },
+                            {
+                                firstName: 'Butter',
+                                lastName: 'Finger',
+                            },
+                        ]"
+                        :placeholder="'Filter by'"
+                    >
+                        <template #default>
+                            Label
+                        </template>
+
+                        <template #option="{ firstName, lastName }">
+                            {{ firstName }} {{ lastName }}
+                        </template>
+
+                        <template #selected-option="{ firstName, lastName }">
+                            {{ firstName }} {{ lastName }}
+                        </template>
+                    </base-select>
+                    <label class="Styleguide__input-category-label ml-24">Formatted options</label>
+                </div>
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Banners (persistent)</h6>
+            </div>
+
+            <section>
+                <base-banner
+                    @close-toast="() => console.log('banana sundae!')"
+                    :action-callback="() => { }"
+                    :action-text="'Click Me'"
+                    :close="true"
+                    data-cy="styleguide-base-banner-persistent"
+                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
+                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
+                    :type="'persistent'"
+                />
+            </section>
+        </div>
+
+        <div class="Styleguide__section">
+            <div class="Styleguide__section-title">
+                <h6>Toastr (temporary)</h6>
+            </div>
+
+            <section id="toastr-section">
+                <base-banner
+                    :action-callback="() => { }"
+                    :action-text="'Action'"
+                    class="mb-10"
+                    :close="true"
+                    data-cy="styleguide-base-banner-error"
+                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
+                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
+                    :type="'error'"
+                />
+                <base-banner
+                    :action-callback="() => { }"
+                    :action-text="'Action'"
+                    class="mb-10"
+                    :close="true"
+                    data-cy="styleguide-base-banner-info"
+                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
+                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
+                    :type="'info'"
+                />
+                <base-banner
+                    :action-callback="() => { }"
+                    :action-text="'Action'"
+                    class="mb-10"
+                    :close="true"
+                    data-cy="styleguide-base-banner-success"
+                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
+                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
+                    :type="'success'"
+                />
+                <div class="Styleguide__toastrs-buttons">
+                    <base-button
+                        @click="triggerErrorToastr"
+                        data-cy="styleguide-error-toastr-btn"
+                        :type="'tertiary'"
+                    >
+                        Test Error Toastr
+                    </base-button>
+
+                    <base-button
+                        @click="triggerInfoToastr"
+                        data-cy="styleguide-info-toastr-btn"
+                        :type="'tertiary'"
+                    >
+                        Test Info Toastr
+                    </base-button>
+
+                    <base-button
+                        @click="triggerSuccessToastr"
+                        data-cy="styleguide-success-toastr-btn"
+                        :type="'tertiary'"
+                    >
+                        Test Success Toastr
+                    </base-button>
+
+                    <base-button
+                        @click="triggerActionToastr"
+                        :type="'tertiary'"
+                    >
+                        Test Action Toastr
+                    </base-button>
+                </div>
+            </section>
+        </div>
+    </main>
+</template>
+
 <script setup lang="ts">
 // Packages
+
 import {
     inject,
     ref,
@@ -12,7 +778,7 @@ import BaseInput from '@src/components/base/base-input.vue';
 import BaseModal from '@src/components/base/base-modal.vue';
 import BaseRadioInput from '@src/components/base/base-radio-input.vue';
 import BaseSelect from '@src/components/base/base-select.vue';
-import AlertTriangle from '@src/components/svg/alert-triangle.vue';
+import AlertTriangleIcon from '@src/components/svg/alert-triangle-icon.vue';
 // Helpers
 import ToastrKey from '@src/utils/keys/toastr';
 
@@ -611,771 +1377,6 @@ const triggerSuccessToastr = (): void => {
 };
 </script>
 
-<template>
-    <main class="Styleguide">
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Typography</h6>
-            </div>
-            <section>
-                <h3 class="mb-4">Inter</h3>
-                <h1>Ag</h1>
-
-                <div class="Styleguide__section-subheader mt-16 mb-16">
-                    <p class="Styleguide__section-subheader-p">
-                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
-                    </p>
-                    <p class="Styleguide__section-subheader-p">
-                        abcdefghijklmnopqrstuvwxyz
-                    </p>
-                    <p class="Styleguide__section-subheader-p">
-                        0123456789 !@#$%^&*()
-                    </p>
-                </div>
-
-                <div
-                    v-for="(type, index) in typeOptions"
-                    :key="`type-${index}`"
-                    class="mb-16"
-                >
-                    <div class="Styleguide__typography-header mb-8 pb-4">
-                        <label class="Styleguide__typography-header-label">{{ type.labels.title
-                        }}</label>
-                        <label class="Styleguide__typography-header-label">
-                            {{ generateTypographyHeader(type) }}
-                        </label>
-                    </div>
-
-                    <div class="Styleguide__typography-examples">
-                        <div class="Styleguide__typography-example">
-                            <label
-                                class="Styleguide__typography-example-label mb-16"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                {{ type.labels.title }}
-                            </label>
-                            <label
-                                class="Styleguide__typography-example-label"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                Regular
-                            </label>
-                        </div>
-
-                        <div class="Styleguide__typography-example">
-                            <label
-                                class="Styleguide__typography-example-label fw-med mb-16"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                {{ type.labels.title }}
-                            </label>
-                            <label
-                                class="Styleguide__typography-example-label fw-med"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                Medium
-                            </label>
-                        </div>
-
-                        <div class="Styleguide__typography-example">
-                            <label
-                                class="Styleguide__typography-example-label fw-semi-bold mb-16"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                {{ type.labels.title }}
-                            </label>
-                            <label
-                                class="Styleguide__typography-example-label fw-semi-bold"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                Semibold
-                            </label>
-                        </div>
-
-                        <div class="Styleguide__typography-example">
-                            <label
-                                class="Styleguide__typography-example-label fw-semi-bold mb-16"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                {{ type.labels.title }}
-                            </label>
-                            <label
-                                class="Styleguide__typography-example-label fw-semi-bold"
-                                :style="generateTypographyStyles(type)"
-                            >
-                                Bold
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="Styleguide__typography-device-differences mt-32">
-                    <div class="Styleguide__typography-device-examples pr-12">
-                        <label class="Styleguide__typography-device-examples-header mb-12">Mobile</label>
-                        <div
-                            v-for="(type, index) in mobileTypes"
-                            :key="`type-${index}`"
-                            class="Styleguide__typography-device-example mb-12"
-                        >
-                            <label
-                                class="cap"
-                                :style="generateTypographyStyles(type.category)"
-                            >
-                                {{ type.tag }}
-                            </label>
-
-                            <label class="Styleguide__typography-header-label">
-                                {{ generateTypographyHeader(type.category) }}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="Styleguide__typography-device-examples">
-                        <label class="Styleguide__typography-device-examples-header mb-12">Desktop</label>
-                        <div
-                            v-for="(type, index) in desktopTypes"
-                            :key="`type-${index}`"
-                            class="Styleguide__typography-device-example mb-12"
-                        >
-                            <label
-                                class="cap"
-                                :style="generateTypographyStyles(type.category)"
-                            >
-                                {{ type.tag }}
-                            </label>
-
-                            <label class="Styleguide__typography-header-label">
-                                {{ generateTypographyHeader(type.category) }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Colors</h6>
-            </div>
-
-            <section>
-                <div
-                    v-for="(bgColorCategory, colorsBGsIndex) in colorsBGs"
-                    :key="`colors-${colorsBGsIndex}`"
-                    class="Styleguide__color-category mb-16"
-                >
-                    <label class="Styleguide__color-category-header mr-8">{{
-                        colorsTypes[colorsBGsIndex] }}</label>
-
-                    <div class="Styleguide__color-category-cards">
-                        <div
-                            v-for="(bgColor, bgColorCategoryIndex) in bgColorCategory"
-                            :key="`base-colors-${bgColorCategoryIndex}`"
-                            class="Styleguide__color-category-card mr-8"
-                        >
-                            <div
-                                class="Styleguide__color-category-card-top"
-                                :style="{ backgroundColor: bgColor }"
-                            >
-                                <label
-                                    class="Styleguide__color-category-card-text"
-                                    :style="{ color: colorsTexts?.[colorsBGsIndex]?.[bgColorCategoryIndex] }"
-                                >
-                                    Text
-                                </label>
-                            </div>
-                            <div class="Styleguide__color-category-card-bottom">
-                                <label class="Styleguide__color-category-card-identifier">
-                                    {{ colorIdentifiers[bgColorCategoryIndex] }}
-                                </label>
-                                <label class="Styleguide__color-category-card-hex">
-                                    {{ bgColor }}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Spacing system guides</h6>
-            </div>
-
-            <section>
-                <div class="Styleguide__spacing-header">
-                    <label class="Styleguide__spacing-header-label">Name</label>
-                    <label class="Styleguide__spacing-header-label">REMs (16px base)</label>
-                    <label class="Styleguide__spacing-header-label">Pixels</label>
-                </div>
-
-                <div class="Styleguide__spacing-table">
-                    <div
-                        v-for="spacing in spacings"
-                        :key="`spacing-${spacing}`"
-                        class="Styleguide__spacing-table-row"
-                    >
-                        <label class="Styleguide__spacing-table-column">{{ spacing.name
-                        }}</label>
-                        <label class="Styleguide__spacing-table-column">{{ spacing.rem
-                        }}rem</label>
-                        <label class="Styleguide__spacing-table-column">{{ spacing.px
-                        }}px</label>
-                        <div class="Styleguide__spacing-table-column">
-                            <label>{{ spacing.px }}px</label>
-                            <progress
-                                class="Styleguide__spacing-table-row-progress"
-                                :max="spacings?.[spacings.length - 1]?.px"
-                                :value="spacing.px"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Buttons</h6>
-            </div>
-
-            <section>
-                <template
-                    v-for="(style) in buttonStyles"
-                    :key="`buttons-${style}`"
-                >
-                    <label class="Styleguide__buttons-subheader subtitle-1 capitalize">{{ style
-                    }}</label>
-
-                    <div class="Styleguide__buttons-example">
-                        <template
-                            v-for="size in buttonSizes"
-                            :key="`buttons-${size}`"
-                        >
-                            <label class="subtitle-2">{{ size }}</label>
-
-                            <div class="Styleguide__buttons-buttons mt-6 mb-6">
-                                <div class="Styleguide__buttons-buttons-example">
-                                    <label
-                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
-                                    >Rest</label>
-                                    <base-button
-                                        :size="size"
-                                        :type="style"
-                                    >
-                                        Button CTA
-                                    </base-button>
-                                </div>
-                                <div class="Styleguide__buttons-buttons-example">
-                                    <label
-                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
-                                    >Hover</label>
-                                    <base-button
-                                        :size="size"
-                                        :type="style"
-                                    >
-                                        Button CTA
-                                    </base-button>
-                                </div>
-                                <div class="Styleguide__buttons-buttons-example">
-                                    <label
-                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
-                                    >Focused</label>
-                                    <base-button
-                                        :size="size"
-                                        :type="style"
-                                    >
-                                        Button CTA
-                                    </base-button>
-                                </div>
-                                <div class="Styleguide__buttons-buttons-example">
-                                    <label
-                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
-                                    >Disabled</label>
-                                    <base-button
-                                        :disabled="true"
-                                        :size="size"
-                                        :type="style"
-                                    >
-                                        Button CTA
-                                    </base-button>
-                                </div>
-                                <div class="Styleguide__buttons-buttons-example">
-                                    <label
-                                        class="Styleguide__buttons-buttons-example-label subtitle-1 mr-3 capitalize"
-                                    >Loading</label>
-                                    <base-button
-                                        :loading="true"
-                                        :size="size"
-                                        :type="style"
-                                    >
-                                        Button CTA
-                                    </base-button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </template>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Inputs</h6>
-            </div>
-
-            <section>
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        :label="true"
-                        :label-for="'input-rest'"
-                        :placeholder="'Enter the number and street'"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Rest</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        :label="true"
-                        :label-for="'input-focused'"
-                        :placeholder="'Enter the number and street'"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Focused</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        v-model="filledInput"
-                        :label="true"
-                        :label-for="'input-filled'"
-                        :placeholder="'Enter the number and street'"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Filled</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        v-model="filledInput"
-                        :disabled="true"
-                        :label="true"
-                        :label-for="'input-disabled'"
-                        :placeholder="'Enter the number and street'"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Disabled</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        v-model="filledInput"
-                        :instructions="'This is an error message.'"
-                        :label="true"
-                        :label-for="'input-error'"
-                        :placeholder="'Enter the number and street'"
-                        :valid="false"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Error</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        v-model="filledInput"
-                        :hint="'This is a hint to help the user.'"
-                        :instructions="'This is an error message.'"
-                        :label="true"
-                        :label-for="'input-hint'"
-                        :placeholder="'Enter the number and street'"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Hint</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        v-model="filledInput"
-                        :label="true"
-                        :label-for="'input-password'"
-                        :placeholder="'Enter the number and street'"
-                        :type="'password'"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Password</label>
-                </div>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-input
-                        :instructions="'You\'ve been a baaaaaad boy'"
-                        :label="true"
-                        :label-for="'input-required'"
-                        :placeholder="'Enter the number and street'"
-                        :required="true"
-                    >
-                        Business address
-                    </base-input>
-                    <label class="Styleguide__input-category-label ml-24">Required</label>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Modals</h6>
-            </div>
-
-            <section>
-                <div class="Styleguide__base-modals">
-                    <base-modal
-                        @close="() => console.log('Close')"
-                        class="Styleguide__base-modal"
-                        :header="'Possible Duplicate!'"
-                        :is-closable="true"
-                        :subheader="'This invoice may have been submitted before. Are you sure you want to submit it again?'"
-                    >
-                        <template #icon>
-                            <alert-triangle class="Styleguide__base-model-alert-triangle" />
-                        </template>
-                        <template #content>
-                            <base-button
-                                class="width-100 mr-3"
-                                :size="'lg'"
-                                :type="'tertiary'"
-                            >
-                                No, cancel
-                            </base-button>
-                            <base-button
-                                class="width-100"
-                                :size="'lg'"
-                            >
-                                Yes, submit
-                            </base-button>
-                        </template>
-                    </base-modal>
-                    <base-modal
-                        @close="() => console.log('Close')"
-                        class="Styleguide__base-modal"
-                        :header="'No internet connection'"
-                        :is-closable="true"
-                        :subheader="'Please try again when you have a strong and stable internet connection'"
-                    >
-                        <template #content>
-                            <base-button
-                                class="width-100"
-                                :size="'lg'"
-                            >
-                                Okay
-                            </base-button>
-                        </template>
-                    </base-modal>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Radio</h6>
-            </div>
-
-            <section>
-                <h6 class="Styleguide__subtitle mt-0">
-                    Without supporting text
-                </h6>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :label="true"
-                        :label-for="'radio-selected'"
-                        :value="true"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Selected</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :label="true"
-                        :label-for="'radio-unselected'"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Unselected</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :label="true"
-                        :label-for="'radio-hover'"
-                        :value="true"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :disabled="true"
-                        :label="true"
-                        :label-for="'radio-hover'"
-                        :value="true"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
-                </div>
-
-                <h6 class="Styleguide__subtitle">
-                    With supporting text
-                </h6>
-
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :label="true"
-                        :label-for="'radio-selected'"
-                        :supporting-label="true"
-                        :supporting-label-for="'radio-selected'"
-                        :value="true"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                        <template #supporting>
-                            Should arrive within 3 hours
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Selected</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :label="true"
-                        :label-for="'radio-unselected'"
-                        :supporting-label="true"
-                        :supporting-label-for="'radio-unselected'"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                        <template #supporting>
-                            Should arrive within 3 hours
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Unselected</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :label="true"
-                        :label-for="'radio-hover'"
-                        :supporting-label="true"
-                        :supporting-label-for="'radio-hover'"
-                        :value="true"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                        <template #supporting>
-                            Should arrive within 3 hours
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-radio-input
-                        :disabled="true"
-                        :label="true"
-                        :label-for="'radio-hover'"
-                        :supporting-label="true"
-                        :supporting-label-for="'radio-hover'"
-                        :value="true"
-                    >
-                        <template #default>
-                            Expedited ($18)
-                        </template>
-                        <template #supporting>
-                            Should arrive within 3 hours
-                        </template>
-                    </base-radio-input>
-                    <label class="Styleguide__input-category-label ml-24">Hover/Focused</label>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Select</h6>
-            </div>
-
-            <section>
-                <div class="Styleguide__input-category mb-6">
-                    <base-select
-                        :options="['Option A', 'Option B']"
-                        :placeholder="'Filter by'"
-                    />
-                    <label class="Styleguide__input-category-label ml-24">Rest (no label)</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-select
-                        :label="true"
-                        :label-for="'base-select-rest'"
-                        :options="['Option A', 'Option B']"
-                        :placeholder="'Filter by'"
-                    >
-                        Label
-                    </base-select>
-                    <label class="Styleguide__input-category-label ml-24">Rest</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-select
-                        :disabled="true"
-                        :label="true"
-                        :label-for="'base-select-disabled'"
-                        :options="['Option A', 'Option B']"
-                        :placeholder="'Filter by'"
-                    >
-                        Label
-                    </base-select>
-                    <label class="Styleguide__input-category-label ml-24">Disabled</label>
-                </div>
-                <div class="Styleguide__input-category mb-6">
-                    <base-select
-                        :label="true"
-                        :label-for="'base-select-disabled'"
-                        :options="[
-                            {
-                                firstName: 'Dick',
-                                lastName: 'Head',
-                            },
-                            {
-                                firstName: 'Butter',
-                                lastName: 'Finger',
-                            },
-                        ]"
-                        :placeholder="'Filter by'"
-                    >
-                        <template #default>
-                            Label
-                        </template>
-
-                        <template #option="{ firstName, lastName }">
-                            {{ firstName }} {{ lastName }}
-                        </template>
-
-                        <template #selected-option="{ firstName, lastName }">
-                            {{ firstName }} {{ lastName }}
-                        </template>
-                    </base-select>
-                    <label class="Styleguide__input-category-label ml-24">Formatted options</label>
-                </div>
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Banners (persistent)</h6>
-            </div>
-
-            <section>
-                <base-banner
-                    @close-toast="() => console.log('banana sundae!')"
-                    :action-callback="() => { }"
-                    :action-text="'Click Me'"
-                    :close="true"
-                    data-cy="styleguide-base-banner-persistent"
-                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
-                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
-                    :type="'persistent'"
-                />
-            </section>
-        </div>
-
-        <div class="Styleguide__section">
-            <div class="Styleguide__section-title">
-                <h6>Toastr (temporary)</h6>
-            </div>
-
-            <section id="toastr-section">
-                <base-banner
-                    :action-callback="() => { }"
-                    :action-text="'Action'"
-                    class="mb-10"
-                    :close="true"
-                    data-cy="styleguide-base-banner-error"
-                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
-                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
-                    :type="'error'"
-                />
-                <base-banner
-                    :action-callback="() => { }"
-                    :action-text="'Action'"
-                    class="mb-10"
-                    :close="true"
-                    data-cy="styleguide-base-banner-info"
-                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
-                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
-                    :type="'info'"
-                />
-                <base-banner
-                    :action-callback="() => { }"
-                    :action-text="'Action'"
-                    class="mb-10"
-                    :close="true"
-                    data-cy="styleguide-base-banner-success"
-                    :header="'Please note that there is a bank holiday on Monday November 24, 2023.'"
-                    :subheader="'There could be a delay of 1-3 business days on the stated ETA of the transfer'"
-                    :type="'success'"
-                />
-                <div class="Styleguide__toastrs-buttons">
-                    <base-button
-                        @click="triggerErrorToastr"
-                        data-cy="styleguide-error-toastr-btn"
-                        :type="'tertiary'"
-                    >
-                        Test Error Toastr
-                    </base-button>
-
-                    <base-button
-                        @click="triggerInfoToastr"
-                        data-cy="styleguide-info-toastr-btn"
-                        :type="'tertiary'"
-                    >
-                        Test Info Toastr
-                    </base-button>
-
-                    <base-button
-                        @click="triggerSuccessToastr"
-                        data-cy="styleguide-success-toastr-btn"
-                        :type="'tertiary'"
-                    >
-                        Test Success Toastr
-                    </base-button>
-
-                    <base-button
-                        @click="triggerActionToastr"
-                        :type="'tertiary'"
-                    >
-                        Test Action Toastr
-                    </base-button>
-                </div>
-            </section>
-        </div>
-    </main>
-</template>
-
 <style lang="scss">
 @use "./styles/base/colors" as *;
 @use "./styles/base/constants" as *;
@@ -1535,14 +1536,14 @@ const triggerSuccessToastr = (): void => {
         #{$block}__spacing-table-column,
         &:last-child {
             border-radius: $border-radius;
-            border-top: 1px dashed rgba(123, 97, 255, 1);
+            border-top: 1px dashed rgb(123 97 255 / 100%);
         }
 
         #{$block}__spacing-table-row:last-child,
         #{$block}__spacing-table-column,
         &:last-child {
             border-radius: $border-radius;
-            border-bottom: 1px dashed rgba(123, 97, 255, 1);
+            border-bottom: 1px dashed rgb(123 97 255 / 100%);
         }
     }
 
@@ -1563,18 +1564,12 @@ const triggerSuccessToastr = (): void => {
         }
 
         &:nth-child(4) {
-            border-left: 1px dashed rgba(123, 97, 255, 1);
-            border-right: 1px dashed rgba(123, 97, 255, 1);
+            border-left: 1px dashed rgb(123 97 255 / 100%);
+            border-right: 1px dashed rgb(123 97 255 / 100%);
             padding: $spacing-4;
             position: relative;
             width: 300px;
         }
-    }
-
-    label {
-        @include text-xs;
-        color: $primary-700-bg;
-        padding: 0 $spacing-1;
     }
 
     &__spacing-table-row {
@@ -1587,9 +1582,8 @@ const triggerSuccessToastr = (): void => {
         left: rems(16px);
         top: rems(13.5px);
         z-index: -1;
+
         /* Reset the default appearance */
-        -webkit-appearance: none;
-        -moz-appearance: none;
         appearance: none;
         border: none;
         border-radius: 0;
@@ -1607,7 +1601,7 @@ const triggerSuccessToastr = (): void => {
     }
 
     &::-webkit-progress-value {
-        background-color: rgba(158, 119, 237, 0.1);
+        background-color: rgb(158 119 237 / 10%);
     }
 
     &__subtitle {

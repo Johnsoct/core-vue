@@ -1,3 +1,56 @@
+<template>
+    <div
+        class="BaseSelect"
+        data-cy="base-select"
+    >
+        <label
+            v-if="label"
+            class="BaseSelect__label"
+            data-cy="base-select-label"
+            :for="labelFor"
+        >
+            <slot />
+        </label>
+        <v-select
+            v-model="selectedOption"
+            :class="['BaseSelect__select', {
+                'BaseSelect__select--disabled': disabled,
+            }]"
+            :clearable="clearable"
+            :components="{
+                Deselect: XCloseIcon,
+            }"
+            data-cy="base-select-select"
+            :disabled="disabled"
+            :id="labelFor"
+            :options="options"
+            :placeholder="placeholder"
+            :searchable="searchable"
+        >
+            <template #open-indicator>
+                <chevron-down-icon
+                    class="BaseSelect__open-indicator-icon"
+                    data-cy="base-select-open-indicator-icon"
+                />
+            </template>
+
+            <template #option="slotProps">
+                <slot
+                    name="option"
+                    v-bind="(slotProps as Record<string, unknown>)"
+                />
+            </template>
+            <template #selected-option="slotProps">
+                <slot
+                    name="selected-option"
+                    v-bind="(slotProps as Record<string, unknown>)"
+                />
+            </template>
+        </v-select>
+    </div>
+</template>
+
+<!-- Only render the component when the options as props is a valid array of options -->
 <script setup lang="ts">
 // Packages
 import vSelect from 'vue-select';
@@ -8,8 +61,8 @@ import {
     watch,
 } from "vue";
 // Components
-import ChevronDown from '@src/components/svg/chevron-down.vue';
-import XClose from '@src/components/svg/x-close.vue';
+import ChevronDownIcon from '@src/components/svg/chevron-down-icon.vue';
+import XCloseIcon from '@src/components/svg/x-close-icon.vue';
 // Styles
 import "vue-select/dist/vue-select.css";
 
@@ -60,64 +113,10 @@ const props = defineProps({
 
 const selectedOption = ref(props.value);
 
-// eslint-disable-next-line arrow-body-style
 watch(() => selectedOption.value, () => {
     emit("update:modelValue", selectedOption.value);
 });
 </script>
-
-<!-- Only render the component when the options as props is a valid array of options -->
-<template>
-    <div
-        class="BaseSelect"
-        data-cy="base-select"
-    >
-        <label
-            v-if="label"
-            class="BaseSelect__label"
-            data-cy="base-select-label"
-            :for="labelFor"
-        >
-            <slot />
-        </label>
-        <v-select
-            v-model="selectedOption"
-            :class="['BaseSelect__select', {
-                'BaseSelect__select--disabled': disabled,
-            }]"
-            :clearable="clearable"
-            :components="{
-                Deselect: XClose,
-            }"
-            data-cy="base-select-select"
-            :disabled="disabled"
-            :id="labelFor"
-            :options="options"
-            :placeholder="placeholder"
-            :searchable="searchable"
-        >
-            <template #open-indicator>
-                <chevron-down
-                    class="BaseSelect__open-indicator-icon"
-                    data-cy="base-select-open-indicator-icon"
-                />
-            </template>
-
-            <template #option="slotProps">
-                <slot
-                    name="option"
-                    v-bind="(slotProps as Record<string, unknown>)"
-                />
-            </template>
-            <template #selected-option="slotProps">
-                <slot
-                    name="selected-option"
-                    v-bind="(slotProps as Record<string, unknown>)"
-                />
-            </template>
-        </v-select>
-    </div>
-</template>
 
 <style lang="scss">
 @use "../../styles/base/colors" as *;

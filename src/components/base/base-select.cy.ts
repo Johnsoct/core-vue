@@ -307,15 +307,15 @@ describe('<BaseSelect />', () => {
                     },
                     slots: {
                         option: `
-<template #option="{ firstName, lastName }">
-{{ firstName }} {{ lastName }}
-</template>
-`,
-                        'selected-option': `
-<template #selected-option="{ firstName, lastName }">
-{{ firstName }} {{ lastName }}
-</template>
-`,
+                            <template #option="{ firstName, lastName }">
+                            {{ firstName }} {{ lastName }}
+                            </template>
+                            `,
+                                                    'selected-option': `
+                            <template #selected-option="{ firstName, lastName }">
+                            {{ firstName }} {{ lastName }}
+                            </template>
+                        `,
                     },
                 });
 

@@ -1,3 +1,44 @@
+<template>
+    <div
+        @click="onChange"
+        :class="['BaseRadioInput', {
+            'BaseRadioInput--disabled': disabled,
+        }]"
+        data-cy="base-radio-input"
+    >
+        <input
+            v-model="radioInputValue"
+            :class="[ 'BaseRadioInput__input', {
+                'BaseRadioInput__input--checked': radioInputValue === true,
+            }]"
+            data-cy="base-radio-input-input"
+            :disabled="disabled"
+            :id="radioID"
+            type="radio"
+            :value="value"
+        >
+        <div class="BaseRadioInput__labels">
+            <label
+                v-if="label"
+                class="BaseRadioInput__label"
+                data-cy="base-radio-input-label"
+                :for="labelFor"
+            >
+                <slot />
+            </label>
+
+            <label
+                v-if="supportingLabel"
+                class="BaseRadioInput__supporting-label"
+                data-cy="base-radio-input-supporting-label"
+                :for="supportingLabelFor"
+            >
+                <slot name="supporting" />
+            </label>
+        </div>
+    </div>
+</template>
+
 <script setup lang="ts">
 // Packages
 import { ref } from 'vue';
@@ -46,47 +87,6 @@ const onChange = () => {
     }
 };
 </script>
-
-<template>
-    <div
-        @click="onChange"
-        :class="['BaseRadioInput', {
-            'BaseRadioInput--disabled': disabled,
-        }]"
-        data-cy="base-radio-input"
-    >
-        <input
-            v-model="radioInputValue"
-            :class="[ 'BaseRadioInput__input', {
-                'BaseRadioInput__input--checked': radioInputValue === true,
-            }]"
-            data-cy="base-radio-input-input"
-            :disabled="disabled"
-            :id="radioID"
-            type="radio"
-            :value="value"
-        >
-        <div class="BaseRadioInput__labels">
-            <label
-                v-if="label"
-                class="BaseRadioInput__label"
-                data-cy="base-radio-input-label"
-                :for="labelFor"
-            >
-                <slot />
-            </label>
-
-            <label
-                v-if="supportingLabel"
-                class="BaseRadioInput__supporting-label"
-                data-cy="base-radio-input-supporting-label"
-                :for="supportingLabelFor"
-            >
-                <slot name="supporting" />
-            </label>
-        </div>
-    </div>
-</template>
 
 <style lang="scss">
 @use "../../styles/base/colors" as *;

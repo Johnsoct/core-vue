@@ -1,7 +1,9 @@
 // Packages
 import Big from 'big.js';
+
 // Components
 import BaseInput from './base-input.vue';
+
 // Helpers
 import {
     BASE_INPUT,
@@ -9,6 +11,7 @@ import {
 import {
     convertHexToRGBA,
 } from '@cypress/support/utils/colors';
+
 // Types
 import type {
     BaseInputCurrencyOutput,
@@ -656,7 +659,7 @@ describe('<BaseInput />', () => {
         });
     });
 
-    context.only('Styles', () => {
+    context('Styles', () => {
         it('Disabled', () => {
             cy.mount(BaseInput, {
                 props: {

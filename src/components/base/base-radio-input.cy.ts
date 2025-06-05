@@ -282,5 +282,5 @@ describe('<BaseRadioInput />', () => {
                     expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).to.equal(defaultValue);
                 });
         });
-        });
+    });
 });

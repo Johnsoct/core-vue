@@ -95,6 +95,7 @@ describe('<BaseBanner />', () => {
                 .get(BASE_BANNER.buttons.action)
                 .click()
                 .then(() => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                     expect(actionSpy).to.be.called;
                 });
         });
