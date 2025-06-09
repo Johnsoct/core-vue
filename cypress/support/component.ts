@@ -14,7 +14,6 @@
 // ***********************************************************
 
 import '@src/styles/base/_index.scss';
-
 // Import commands.js using ES2015 syntax:
 import './commands/vue';
 import './commands/select';

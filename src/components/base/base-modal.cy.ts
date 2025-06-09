@@ -1,6 +1,8 @@
 // Components
-import BaseModal from './base-modal.vue';
 import AlertTriangle from '@src/components/svg/alert-triangle.vue';
+
+import BaseModal from './base-modal.vue';
+
 // Helpers
 import {
     BASE_MODAL,

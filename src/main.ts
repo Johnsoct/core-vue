@@ -1,18 +1,20 @@
 // Packages
 import {
-	type App,
-	createApp,
+    type App,
+    createApp,
 } from 'vue';
 // Components
 import * as components from '@src/components';
 import Styleguide from '@src/Styleguide.vue';
 // Plugins
 import { ToastrPlugin } from '@src/utils/plugins/toastr';
+// Styles
+import '@src/styles/main.scss';
 
 const app = createApp(Styleguide);
 
 app.use(ToastrPlugin, {
-	shareAppContext: true,
+    shareAppContext: true,
 });
 
 app.mount('#styleguide');
